@@ -1,0 +1,11 @@
+/* Written by src/poster.ts (open the site with ?poster in dev). Where the poster layers sit, in CSS px of the
+   screen they were rendered for, from the island box's bottom centre; --bw and --bh are the box's size there. */
+.poster { --fill: 0.82; --fill-h: 0.5; --bottom: 0.05; }
+.poster { --bw: 869.53; --bh: 500; }
+.poster-island { --x: -427.5; --y: -500; --w: 862.5; }
+.poster-shadow { --x: -726; --y: -452; --w: 1562; }
+@media (max-aspect-ratio: 1/1) {
+  .poster { --bw: 319.8; --bh: 193.91; }
+  .poster-island { --x: -159; --y: -194.3; --w: 319; }
+  .poster-shadow { --x: -269; --y: -187.8; --w: 620; }
+}

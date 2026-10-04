@@ -1,0 +1,24 @@
+{
+  "name": "isabel-linda-library",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "bake": "/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup -P blender/bake_export.py && gltf-transform meshopt public/island/island.glb public/island/island.glb",
+    "bake:quick": "/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup -P blender/bake_export.py -- --quick && gltf-transform meshopt public/island/island.glb public/island/island.glb"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.5.1",
+    "@types/three": "^0.186.0",
+    "lil-gui": "^0.21.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2"
+  }
+}

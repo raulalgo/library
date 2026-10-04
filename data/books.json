@@ -1,0 +1,2617 @@
+{
+  "_about": "All books in the Libib collection, in scan order, which is shelf order: Spanish shelf (top) left to right, then English shelf (bottom). From the Libib scan (references/library_*.csv), with sizes in mm (h = spine length, w = cover width, t = thickness): h from Amazon listings, w from the cover image's proportions, h replaced by the photo measurement where they disagree (source \"photo\"), t always measured from the spine photo. spine = the straightened spine image in public/, color = its average colour, cover = front cover image in public/ (Amazon or Open Library, or flattened from a product shot) and names, original titles and first-publication years checked by hand. \"verify\" lists what still needs checking. about = one-sentence summary in ES and EN, written by Claude from publisher blurbs, to be reviewed by Raúl.",
+  "books": [
+    {
+      "slug": "teo-y-sus-abuelos",
+      "shelf": "es",
+      "title": "Teo y sus abuelos",
+      "series": "Teo descubre el mundo",
+      "authors": [
+        "Violeta Denou"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Teo pasa el día con sus abuelos, que le enseñan cosas de cuando eran jóvenes y le cuidan como nadie.",
+        "en": "Teo spends the day with his grandparents, who show him how things were when they were young."
+      },
+      "publisher": "Timun Mas",
+      "year": 1992,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 255,
+        "w": 249,
+        "t": 8.7,
+        "source": "amazon"
+      },
+      "isbn": "9788477227434",
+      "spine": "spines/teo-y-sus-abuelos.jpg",
+      "color": "#75828d",
+      "cover": "covers/teo-y-sus-abuelos.jpg"
+    },
+    {
+      "slug": "teo-en-la-granja",
+      "shelf": "es",
+      "title": "Teo en la granja",
+      "series": "Teo descubre el mundo",
+      "authors": [
+        "Violeta Denou"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Teo visita una granja y descubre los animales, los cultivos y el trabajo de cada día en el campo.",
+        "en": "Teo visits a farm and discovers the animals, the crops and the daily work of the countryside."
+      },
+      "publisher": "Timun Mas",
+      "year": 2016,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 255,
+        "w": 247,
+        "t": 9.0,
+        "source": "amazon"
+      },
+      "isbn": "9788408157175",
+      "spine": "spines/teo-en-la-granja.jpg",
+      "color": "#b5b7b4",
+      "cover": "covers/teo-en-la-granja.jpg"
+    },
+    {
+      "slug": "el-anzuelo-que-me-pesco",
+      "shelf": "es",
+      "title": "El anzuelo que me pescó",
+      "authors": [
+        "Pilar Serrano",
+        "Pepita Mendoza"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Elena quiere construir el mejor castillo de arena del mundo, pero entre los nervios de su madre y un accidente inesperado, el día de playa acaba siendo inolvidable.",
+        "en": "Elena sets out to build the best sandcastle ever, but her worried mother and an unexpected accident turn a day at the beach into one she won't forget."
+      },
+      "publisher": "Gato Sueco",
+      "year": 2025,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 40,
+      "size": {
+        "h": 214,
+        "w": 305,
+        "t": 8.3,
+        "source": "photo"
+      },
+      "isbn": "9788412794175",
+      "verify": [
+        "who wrote and who illustrated"
+      ],
+      "spine": "spines/el-anzuelo-que-me-pesco.jpg",
+      "color": "#b9b8bb",
+      "cover": "covers/el-anzuelo-que-me-pesco.jpg"
+    },
+    {
+      "slug": "el-raton-ladron",
+      "shelf": "es",
+      "title": "El ratón ladrón",
+      "authors": [
+        "Julia Donaldson"
+      ],
+      "illustrators": [
+        "Axel Scheffler"
+      ],
+      "about": {
+        "es": "Un ratón bandido roba la comida a todos los que pasan por su camino, hasta que una pata lista le da su merecido.",
+        "en": "A greedy rat robs everyone who travels his road of their food, until a clever duck outwits him."
+      },
+      "translators": [
+        "Roberto Vivero Rodríguez"
+      ],
+      "original": {
+        "title": "The Highway Rat",
+        "lang": "en",
+        "year": 2011
+      },
+      "publisher": "Bruño",
+      "year": 2023,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 40,
+      "size": {
+        "h": 285,
+        "w": 320,
+        "t": 8.2,
+        "source": "amazon"
+      },
+      "isbn": "9788469668665",
+      "spine": "spines/el-raton-ladron.jpg",
+      "color": "#a26168",
+      "cover": "covers/el-raton-ladron.jpg"
+    },
+    {
+      "slug": "huevos-verdes-con-jamon",
+      "shelf": "es",
+      "title": "Huevos verdes con jamón",
+      "authors": [
+        "Dr. Seuss"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Alguien insiste una y otra vez en que su amigo pruebe los huevos verdes con jamón, aquí, allí y en todas partes, hasta que por fin los prueba.",
+        "en": "Sam-I-Am keeps offering green eggs and ham, here, there and everywhere, until his grumpy friend finally tries them."
+      },
+      "translators": [
+        "Aída E. Marcuse"
+      ],
+      "original": {
+        "title": "Green Eggs and Ham",
+        "lang": "en",
+        "year": 1960
+      },
+      "publisher": "Lectorum",
+      "year": 1992,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 62,
+      "size": {
+        "h": 229,
+        "w": 164,
+        "t": 9.8,
+        "source": "amazon"
+      },
+      "isbn": "9781880507018",
+      "spine": "spines/huevos-verdes-con-jamon.jpg",
+      "color": "#b35c4b",
+      "cover": "covers/huevos-verdes-con-jamon.jpg"
+    },
+    {
+      "slug": "la-pequena-oruga-glotona",
+      "shelf": "es",
+      "title": "La pequeña oruga glotona",
+      "authors": [
+        "Eric Carle"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Una oruga muy hambrienta come cada día un poco más, hasta que se envuelve en un capullo y sale convertida en mariposa.",
+        "en": "A very hungry caterpillar eats more and more each day of the week, then wraps itself in a cocoon and comes out a butterfly."
+      },
+      "original": {
+        "title": "The Very Hungry Caterpillar",
+        "lang": "en",
+        "year": 1969
+      },
+      "publisher": "Kókinos",
+      "year": 2007,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 220,
+        "w": 335,
+        "t": 9.1,
+        "source": "amazon"
+      },
+      "isbn": "9788488342348",
+      "spine": "spines/la-pequena-oruga-glotona.jpg",
+      "color": "#b9b4b2",
+      "cover": "covers/la-pequena-oruga-glotona.jpg"
+    },
+    {
+      "slug": "el-nino-el-topo-el-zorro-y-el-caballo-la-historia-animada",
+      "shelf": "es",
+      "title": "El niño, el topo, el zorro y el caballo: la historia animada",
+      "authors": [
+        "Charlie Mackesy"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un niño perdido recorre el campo con un topo, un zorro y un caballo, y hablando con ellos aprende sobre la amistad, el valor y el hogar; el libro del cortometraje animado.",
+        "en": "A lost boy crosses the countryside with a mole, a fox and a horse, talking about friendship, courage and home; the book of the animated film."
+      },
+      "original": {
+        "title": "The Boy, the Mole, the Fox and the Horse: The Animated Story",
+        "lang": "en"
+      },
+      "publisher": "Suma",
+      "year": 2024,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 192,
+      "size": {
+        "h": 219,
+        "w": 195,
+        "t": 21.8,
+        "source": "amazon"
+      },
+      "isbn": "9788491298991",
+      "verify": [
+        "original year"
+      ],
+      "spine": "spines/el-nino-el-topo-el-zorro-y-el-caballo-la-historia-animada.jpg",
+      "color": "#535357",
+      "cover": "covers/el-nino-el-topo-el-zorro-y-el-caballo-la-historia-animada.jpg"
+    },
+    {
+      "slug": "el-libro-enfadado",
+      "shelf": "es",
+      "title": "El libro enfadado",
+      "authors": [
+        "Cédric Ramadier"
+      ],
+      "illustrators": [
+        "Vincent Bourgeau"
+      ],
+      "about": {
+        "es": "Este libro está rojo de rabia, y el lector tiene que ayudarle a calmarse página a página.",
+        "en": "This book is red with rage, and the reader has to help it calm down, page by page."
+      },
+      "publisher": "Lectorum",
+      "year": 2017,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 20,
+      "size": {
+        "h": 248,
+        "w": 191,
+        "t": 13.1,
+        "source": "amazon"
+      },
+      "isbn": "9788494565380",
+      "verify": [
+        "publisher (Libib says Lectorum)",
+        "original French title"
+      ],
+      "spine": "spines/el-libro-enfadado.jpg",
+      "color": "#8a3e3e",
+      "cover": "covers/el-libro-enfadado.jpg"
+    },
+    {
+      "slug": "el-cartero-simpatico",
+      "shelf": "es",
+      "title": "El cartero simpático",
+      "authors": [
+        "Janet Ahlberg",
+        "Allan Ahlberg"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un cartero en bicicleta reparte cartas a personajes de cuento, y cada carta viene de verdad dentro de su sobre.",
+        "en": "A postman cycles round delivering letters to fairy-tale characters, and each letter comes in a real envelope to open."
+      },
+      "translators": [
+        "Antoni Vicens"
+      ],
+      "original": {
+        "title": "The Jolly Postman",
+        "lang": "en",
+        "year": 1986
+      },
+      "publisher": "Destino Infantil & Juvenil",
+      "year": 2025,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 72,
+      "size": {
+        "h": 195,
+        "w": 250,
+        "t": 10.7,
+        "source": "amazon"
+      },
+      "isbn": "9788408231158",
+      "spine": "spines/el-cartero-simpatico.jpg",
+      "color": "#9c8a75",
+      "cover": "covers/el-cartero-simpatico.jpg"
+    },
+    {
+      "slug": "el-taller-de-papa-noel",
+      "shelf": "es",
+      "title": "El taller de Papá Noel",
+      "authors": [],
+      "illustrators": [
+        "Natàlia Juan Abelló"
+      ],
+      "about": {
+        "es": "Un libro de Adviento desplegable con 25 solapas, una para cada día de diciembre, que lleva al Polo Norte donde trabajan Papá Noel y sus elfos.",
+        "en": "A fold-out Advent book with 25 flaps, one for each day of December, leading to the North Pole where Father Christmas and his elves are at work."
+      },
+      "publisher": "Timun Mas",
+      "year": 2026,
+      "lang": "es",
+      "binding": "board",
+      "pages": 26,
+      "size": {
+        "h": 203,
+        "w": 156,
+        "t": 21.6,
+        "source": "photo"
+      },
+      "isbn": "9788408291459",
+      "verify": [
+        "year (Libib says 14 Oct 2026)"
+      ],
+      "spine": "spines/el-taller-de-papa-noel.jpg",
+      "color": "#977254",
+      "cover": "covers/el-taller-de-papa-noel.jpg"
+    },
+    {
+      "slug": "esto-es-mio",
+      "shelf": "es",
+      "title": "¡Esto es mío!",
+      "series": "¡Adelante!",
+      "authors": [
+        "Elisenda Roca"
+      ],
+      "illustrators": [
+        "Cristina Losantos"
+      ],
+      "about": {
+        "es": "Alejo siempre compartía sus juguetes, hasta que un día decide que todo es suyo, y una experiencia le quita las ganas de volver a ser tacaño; en verso.",
+        "en": "Alejo always shared his toys, until one day he decides everything is his, and something happens that cures him of it; told in rhyme."
+      },
+      "publisher": "Combel",
+      "year": 2024,
+      "lang": "es",
+      "binding": "board",
+      "pages": 48,
+      "size": {
+        "h": 216,
+        "w": 156,
+        "t": 8.6,
+        "source": "amazon"
+      },
+      "isbn": "9788411580595",
+      "verify": [
+        "binding (Amazon says board book, 48 pages)"
+      ],
+      "spine": "spines/esto-es-mio.jpg",
+      "color": "#575f68",
+      "cover": "covers/esto-es-mio.jpg"
+    },
+    {
+      "slug": "pipa-y-otto-en-el-arrecife",
+      "shelf": "es",
+      "title": "Pipa y Otto en el arrecife",
+      "authors": [
+        "Patricia Geis"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Pipa, que viaja con su cámara para fotografiar animales, y su amigo Otto bucean en un arrecife de coral lleno de peces, tortugas y medusas.",
+        "en": "Pipa, who travels with her camera to photograph animals, dives with her friend Otto on a coral reef full of fish, turtles and jellyfish."
+      },
+      "publisher": "Combel",
+      "year": 2023,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 12,
+      "size": {
+        "h": 260,
+        "w": 223,
+        "t": 21.9,
+        "source": "amazon"
+      },
+      "isbn": "9788491019091",
+      "spine": "spines/pipa-y-otto-en-el-arrecife.jpg",
+      "color": "#6a8594",
+      "cover": "covers/pipa-y-otto-en-el-arrecife.jpg"
+    },
+    {
+      "slug": "los-reyes-magos",
+      "shelf": "es",
+      "title": "Los Reyes Magos",
+      "series": "Minipops",
+      "authors": [
+        "Meritxell Martí"
+      ],
+      "illustrators": [
+        "Xavier Salomó"
+      ],
+      "about": {
+        "es": "Un pequeño libro desplegable que cuenta el viaje de Melchor, Gaspar y Baltasar siguiendo la estrella hasta Belén.",
+        "en": "A small pop-up book telling how the Three Kings followed the star to Bethlehem."
+      },
+      "publisher": "Combel",
+      "year": 2019,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 10,
+      "size": {
+        "h": 184,
+        "w": 177,
+        "t": 17.6,
+        "source": "amazon"
+      },
+      "isbn": "9788491013679",
+      "spine": "spines/los-reyes-magos.jpg",
+      "color": "#826747",
+      "cover": "covers/los-reyes-magos.jpg"
+    },
+    {
+      "slug": "el-monstruo-de-colores",
+      "shelf": "es",
+      "title": "El monstruo de colores",
+      "authors": [
+        "Anna Llenas"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "El monstruo de colores se ha hecho un lío con sus emociones, y una niña le ayuda a ordenarlas en botes, cada una de su color.",
+        "en": "The colour monster has got his feelings in a muddle, and a girl helps him sort them into jars, one colour for each."
+      },
+      "firstPublished": 2012,
+      "publisher": "Flamboyant",
+      "year": 2017,
+      "lang": "es",
+      "binding": "board",
+      "pages": 20,
+      "size": {
+        "h": 165,
+        "w": 174,
+        "t": 13.4,
+        "source": "amazon"
+      },
+      "isbn": "9788494681516",
+      "spine": "spines/el-monstruo-de-colores.jpg",
+      "color": "#7a828c",
+      "cover": "covers/el-monstruo-de-colores.jpg"
+    },
+    {
+      "slug": "en-el-bano",
+      "shelf": "es",
+      "title": "En el baño",
+      "authors": [
+        "Andrea Wayne von Königslöw"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "¿Qué pasaría si los animales usaran el baño como los niños? Un libro con humor para aprender a ir al váter.",
+        "en": "What if animals used the toilet the way children do? A funny book about learning to use the potty."
+      },
+      "publisher": "Ekaré",
+      "year": 2019,
+      "lang": "es",
+      "binding": "board",
+      "pages": 24,
+      "size": {
+        "h": 140,
+        "w": 139,
+        "t": 10.8,
+        "source": "amazon"
+      },
+      "isbn": "9788494885952",
+      "verify": [
+        "original English title"
+      ],
+      "spine": "spines/en-el-bano.jpg",
+      "color": "#58566d",
+      "cover": "covers/en-el-bano.jpg"
+    },
+    {
+      "slug": "donde-esta-la-senora-gallina",
+      "shelf": "es",
+      "title": "¿Dónde está la señora Gallina?",
+      "authors": [
+        "Ingela P. Arrhenius"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Los animales de la granja se esconden detrás de solapas de fieltro, y hay que levantarlas para encontrarlos.",
+        "en": "The farm animals hide behind felt flaps, and you lift them to find each one."
+      },
+      "original": {
+        "title": "Where's Mrs Hen?",
+        "lang": "en"
+      },
+      "publisher": "Planeta",
+      "year": 2017,
+      "lang": "es",
+      "binding": "board",
+      "pages": 10,
+      "size": {
+        "h": 180,
+        "w": 179,
+        "t": 19.0,
+        "source": "amazon"
+      },
+      "isbn": "9788408164999",
+      "verify": [
+        "original title and year"
+      ],
+      "spine": "spines/donde-esta-la-senora-gallina.jpg",
+      "color": "#778865",
+      "cover": "covers/donde-esta-la-senora-gallina.jpg"
+    },
+    {
+      "slug": "buenas-noches-luna",
+      "shelf": "es",
+      "title": "Buenas noches, Luna",
+      "authors": [
+        "Margaret Wise Brown"
+      ],
+      "illustrators": [
+        "Clement Hurd"
+      ],
+      "about": {
+        "es": "Un conejito se despide, una por una, de todas las cosas de su habitación antes de dormirse.",
+        "en": "A little rabbit says goodnight to everything in his room, one thing at a time, as he falls asleep."
+      },
+      "original": {
+        "title": "Goodnight Moon",
+        "lang": "en",
+        "year": 1947
+      },
+      "publisher": "Corimbo",
+      "year": 2017,
+      "lang": "es",
+      "binding": "board",
+      "pages": 32,
+      "size": {
+        "h": 120,
+        "w": 141,
+        "t": 23.5,
+        "source": "amazon"
+      },
+      "isbn": "9788484705611",
+      "spine": "spines/buenas-noches-luna.jpg",
+      "color": "#c6602c",
+      "cover": "covers/buenas-noches-luna.jpg"
+    },
+    {
+      "slug": "juan-rex",
+      "shelf": "es",
+      "title": "Juan Rex",
+      "authors": [
+        "Joaquín Camp"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Juan Rex viene de una ilustre familia de profesionales del miedo, pero asustar no se le da nada bien: lo suyo es divertir.",
+        "en": "Juan Rex comes from a long line of professional scarers, but he is no good at frightening anyone: what he loves is entertaining."
+      },
+      "publisher": "Libros del Zorro Rojo",
+      "year": 2025,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 56,
+      "size": {
+        "h": 401,
+        "w": 300,
+        "t": 9.3,
+        "source": "photo"
+      },
+      "isbn": "9791399040173",
+      "flat": true,
+      "spine": "spines/juan-rex.jpg",
+      "color": "#a26273",
+      "cover": "covers/juan-rex.jpg"
+    },
+    {
+      "slug": "atlas-del-mundo",
+      "shelf": "es",
+      "title": "Atlas del mundo",
+      "authors": [
+        "Aleksandra Mizielińska",
+        "Daniel Mizieliński"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un atlas enorme con mapas ilustrados de decenas de países, llenos de animales, monumentos, comidas y personajes de cada lugar.",
+        "en": "A huge atlas of illustrated maps of dozens of countries, crowded with the animals, landmarks, food and people of each place."
+      },
+      "translators": [
+        "Rocío Isasa"
+      ],
+      "original": {
+        "title": "Mapy",
+        "lang": "pl",
+        "year": 2012
+      },
+      "publisher": "Maeva Ediciones",
+      "year": 2015,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 120,
+      "size": {
+        "h": 376,
+        "w": 273,
+        "t": 18.2,
+        "source": "amazon"
+      },
+      "isbn": "9788416363469",
+      "flat": true,
+      "spine": "spines/atlas-del-mundo.jpg",
+      "color": "#9caeb1",
+      "cover": "covers/atlas-del-mundo.jpg"
+    },
+    {
+      "slug": "the-island-of-the-skog",
+      "shelf": "en",
+      "title": "The Island of the Skog",
+      "authors": [
+        "Steven Kellogg"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Hartos de los gatos de la ciudad, unos ratones zarpan hacia una isla, y allí tienen que vérselas con el misterioso Skog.",
+        "en": "Tired of the city cats, a band of mice sail off to an island, where they have to face the mysterious Skog."
+      },
+      "firstPublished": 1973,
+      "publisher": "Puffin",
+      "year": 1993,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 224,
+        "w": 270,
+        "t": 2.6,
+        "source": "photo"
+      },
+      "isbn": "9780140546491",
+      "spine": "spines/the-island-of-the-skog.jpg",
+      "color": "#808a8a",
+      "cover": "covers/the-island-of-the-skog.jpg"
+    },
+    {
+      "slug": "illustrated-fables-of-la-fontaine",
+      "shelf": "en",
+      "title": "Illustrated Fables of La Fontaine",
+      "authors": [
+        "Jean de La Fontaine"
+      ],
+      "illustrators": [
+        "Jan Kaspar",
+        "Zdenka Krejčová"
+      ],
+      "about": {
+        "es": "Una selección de las fábulas de La Fontaine, como la cigarra y la hormiga o el cuervo y el zorro, con ilustraciones a toda página.",
+        "en": "A selection of La Fontaine's fables, such as the grasshopper and the ant and the fox and the crow, with full-page illustrations."
+      },
+      "publisher": "Sunburst Books",
+      "year": 1995,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 96,
+      "size": {
+        "h": 306,
+        "w": 218,
+        "t": 12.6,
+        "source": "photo"
+      },
+      "isbn": "9781857781540",
+      "verify": [
+        "roles of Jan Kaspar and Zdenka Krejčová"
+      ],
+      "spine": "spines/illustrated-fables-of-la-fontaine.jpg",
+      "cover": "covers/illustrated-fables-of-la-fontaine.jpg",
+      "color": "#bb464c"
+    },
+    {
+      "slug": "chicka-chicka-boom-boom",
+      "shelf": "en",
+      "title": "Chicka Chicka Boom Boom",
+      "authors": [
+        "Bill Martin Jr",
+        "John Archambault"
+      ],
+      "illustrators": [
+        "Lois Ehlert"
+      ],
+      "about": {
+        "es": "Todas las letras del abecedario trepan a un cocotero, hasta que el árbol no aguanta más y caen todas.",
+        "en": "All the letters of the alphabet race up a coconut tree, until there are too many and they all come tumbling down."
+      },
+      "firstPublished": 1989,
+      "publisher": "Little Simon",
+      "year": 2012,
+      "lang": "en",
+      "binding": "board",
+      "pages": 36,
+      "size": {
+        "h": 184,
+        "w": 140,
+        "t": 20.7,
+        "source": "amazon"
+      },
+      "isbn": "9781442450707",
+      "spine": "spines/chicka-chicka-boom-boom.jpg",
+      "color": "#7d3357",
+      "cover": "covers/chicka-chicka-boom-boom.jpg"
+    },
+    {
+      "slug": "busy-busy-town",
+      "shelf": "en",
+      "title": "Busy, Busy Town",
+      "authors": [
+        "Richard Scarry"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un recorrido por un pueblo donde todo el mundo trabaja: bomberos, panaderos, carteros, médicos y muchos más.",
+        "en": "A tour of a town where everyone is at work: firefighters, bakers, postmen, doctors and many more."
+      },
+      "publisher": "Random House Children's Books",
+      "year": 2000,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 48,
+      "size": {
+        "h": 310,
+        "w": 267,
+        "t": 10.3,
+        "source": "amazon"
+      },
+      "isbn": "9780307168030",
+      "spine": "spines/busy-busy-town.jpg",
+      "color": "#75b3de",
+      "cover": "covers/busy-busy-town.jpg"
+    },
+    {
+      "slug": "brave-charlotte",
+      "shelf": "en",
+      "title": "Brave Charlotte",
+      "authors": [
+        "Anu Stohner"
+      ],
+      "illustrators": [
+        "Henrike Wilson"
+      ],
+      "about": {
+        "es": "Carlota es una oveja distinta a las demás, curiosa y atrevida, y cuando el pastor se rompe la pierna es ella la que va a buscar ayuda.",
+        "en": "Charlotte is not like the other sheep: she is curious and daring, and when the shepherd breaks his leg she is the one who goes for help."
+      },
+      "translators": [
+        "Alyson Cole"
+      ],
+      "publisher": "Bloomsbury",
+      "year": 2005,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 307,
+        "w": 252,
+        "t": 8.7,
+        "source": "amazon"
+      },
+      "isbn": "9781582346908",
+      "verify": [
+        "original German title",
+        "translator"
+      ],
+      "spine": "spines/brave-charlotte.jpg",
+      "color": "#889ba3",
+      "cover": "covers/brave-charlotte.jpg"
+    },
+    {
+      "slug": "the-nutcracker",
+      "shelf": "en",
+      "title": "The Nutcracker",
+      "series": "The Story Orchestra",
+      "authors": [],
+      "illustrators": [
+        "Jessica Courtney-Tickle"
+      ],
+      "about": {
+        "es": "La historia de Clara y el cascanueces, con botones que hacen sonar la música de Chaikovski.",
+        "en": "The story of Clara and the Nutcracker, with buttons to press that play Tchaikovsky's music."
+      },
+      "publisher": "Quarto",
+      "year": 2017,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 24,
+      "size": {
+        "h": 273,
+        "w": 317,
+        "t": 17.4,
+        "source": "photo"
+      },
+      "isbn": "9781786030689",
+      "spine": "spines/the-nutcracker.jpg",
+      "color": "#be7c6c",
+      "cover": "covers/the-nutcracker.jpg"
+    },
+    {
+      "slug": "a-child-s-treasury-of-nursery-rhymes",
+      "shelf": "en",
+      "title": "A Child's Treasury of Nursery Rhymes",
+      "authors": [],
+      "illustrators": [
+        "Kady MacDonald Denton"
+      ],
+      "about": {
+        "es": "Una gran colección de canciones y rimas infantiles inglesas, de las de cuna a las de jugar.",
+        "en": "A big collection of English nursery rhymes, from lullabies to skipping and clapping songs."
+      },
+      "publisher": "Kingfisher",
+      "year": 2018,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 96,
+      "size": {
+        "h": 282,
+        "w": 236,
+        "t": 12.7,
+        "source": "amazon"
+      },
+      "isbn": "9780753474907",
+      "spine": "spines/a-child-s-treasury-of-nursery-rhymes.jpg",
+      "color": "#b35150",
+      "cover": "covers/a-child-s-treasury-of-nursery-rhymes.jpg"
+    },
+    {
+      "slug": "we-are-definitely-human",
+      "shelf": "en",
+      "title": "We Are Definitely Human",
+      "authors": [
+        "X. Fang"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Tres visitantes muy raros se estrellan en el campo del señor Li y juran que son humanos; el pueblo, en vez de asustarse, les ayuda y acaba montando una fiesta.",
+        "en": "Three odd visitors crash-land in Mr Li's field and insist they are definitely human; instead of panicking, the town helps them and throws a party."
+      },
+      "publisher": "Pushkin Press",
+      "year": 2025,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 48,
+      "size": {
+        "h": 279,
+        "w": 218,
+        "t": 12.7,
+        "source": "amazon"
+      },
+      "isbn": "9781782695172",
+      "spine": "spines/we-are-definitely-human.jpg",
+      "color": "#38383e",
+      "cover": "covers/we-are-definitely-human.jpg"
+    },
+    {
+      "slug": "fox-in-a-box",
+      "shelf": "en",
+      "title": "Fox in a Box",
+      "authors": [
+        "Eva Klassen"
+      ],
+      "illustrators": [
+        "Leanne Thiessen"
+      ],
+      "about": {
+        "es": "Zorro guarda su colección en una caja negra, hasta que ya no cabe y decide repartir cosas entre sus amigos.",
+        "en": "Fox keeps his collection of socks, clocks and rocks in a black box, until it overflows and he decides to share things with his friends."
+      },
+      "publisher": "Big Mind Books",
+      "year": 2019,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 40,
+      "size": {
+        "h": 303,
+        "w": 266,
+        "t": 11.3,
+        "source": "photo"
+      },
+      "isbn": "9781999244804",
+      "spine": "spines/fox-in-a-box.jpg",
+      "cover": "covers/fox-in-a-box.jpg",
+      "color": "#93958e"
+    },
+    {
+      "slug": "in-the-night-kitchen",
+      "shelf": "en",
+      "title": "In the Night Kitchen",
+      "authors": [
+        "Maurice Sendak"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Una noche Mickey cae a la cocina nocturna, donde tres panaderos casi lo meten en el horno dentro de un pastel.",
+        "en": "One night Mickey falls into the Night Kitchen, where three bakers nearly bake him into a cake."
+      },
+      "firstPublished": 1970,
+      "publisher": "Red Fox",
+      "year": 2001,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 40,
+      "size": {
+        "h": 280,
+        "w": 215,
+        "t": 5.3,
+        "source": "amazon"
+      },
+      "isbn": "9780099417477",
+      "spine": "spines/in-the-night-kitchen.jpg",
+      "color": "#514734",
+      "cover": "covers/in-the-night-kitchen.jpg"
+    },
+    {
+      "slug": "the-knight-who-said-no",
+      "shelf": "en",
+      "title": "The Knight Who Said “No!”",
+      "authors": [
+        "Lucy Rowland"
+      ],
+      "illustrators": [
+        "Kate Hindley"
+      ],
+      "about": {
+        "es": "El caballero Torvald siempre hace lo que le mandan, hasta que un día empieza a decir que no a todo.",
+        "en": "Torvald the knight always does as he is told, until one day he starts saying \"No!\" to everything."
+      },
+      "publisher": "Nosy Crow",
+      "year": 2026,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 302,
+        "w": 260,
+        "t": 5.1,
+        "source": "photo"
+      },
+      "isbn": "9781807080129",
+      "spine": "spines/the-knight-who-said-no.jpg",
+      "color": "#6a7274",
+      "cover": "covers/the-knight-who-said-no.jpg"
+    },
+    {
+      "slug": "the-magic-boat",
+      "shelf": "en",
+      "title": "The Magic Boat",
+      "authors": [
+        "Kit Pearson",
+        "Katherine Farris"
+      ],
+      "illustrators": [
+        "Gabrielle Grimard"
+      ],
+      "about": {
+        "es": "Ellie pasa el verano en la playa con su abuela, y una niña mayor, Piper, la lleva en un barco mágico que navega y hasta vuela.",
+        "en": "Ellie spends the summer at the beach with her grandmother, and an older girl, Piper, takes her out in a magic boat that sails and even flies."
+      },
+      "publisher": "Orca Book Publishers",
+      "year": 2019,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 273,
+        "w": 215,
+        "t": 11.4,
+        "source": "amazon"
+      },
+      "isbn": "9781459814325",
+      "spine": "spines/the-magic-boat.jpg",
+      "color": "#8a6248",
+      "cover": "covers/the-magic-boat.jpg"
+    },
+    {
+      "slug": "the-polar-express",
+      "shelf": "en",
+      "title": "The Polar Express",
+      "authors": [
+        "Chris Van Allsburg"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un niño sube en Nochebuena a un tren que lo lleva al Polo Norte, donde Papá Noel le regala el primer regalo de la Navidad.",
+        "en": "On Christmas Eve a boy boards a train to the North Pole, where Santa gives him the first gift of Christmas."
+      },
+      "firstPublished": 1985,
+      "publisher": "Andersen Press",
+      "year": 2015,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 230,
+        "w": 290,
+        "t": 5.1,
+        "source": "amazon"
+      },
+      "isbn": "9781783443338",
+      "spine": "spines/the-polar-express.jpg",
+      "color": "#413f34",
+      "cover": "covers/the-polar-express.jpg"
+    },
+    {
+      "slug": "the-runaway-bunny",
+      "shelf": "en",
+      "title": "The Runaway Bunny",
+      "authors": [
+        "Margaret Wise Brown"
+      ],
+      "illustrators": [
+        "Clement Hurd"
+      ],
+      "about": {
+        "es": "Un conejito imagina todas las formas de escaparse de su madre, y ella siempre encuentra la manera de ir a buscarlo.",
+        "en": "A little bunny imagines all the ways he could run away, and his mother always has a way to come after him."
+      },
+      "firstPublished": 1942,
+      "publisher": "Picture Lions",
+      "year": 1977,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 216,
+        "w": 248,
+        "t": 5.1,
+        "source": "amazon"
+      },
+      "isbn": "9780064430180",
+      "spine": "spines/the-runaway-bunny.jpg",
+      "color": "#9c2934",
+      "cover": "covers/the-runaway-bunny.jpg"
+    },
+    {
+      "slug": "out-and-about",
+      "shelf": "en",
+      "title": "Out and About",
+      "authors": [
+        "Shirley Hughes"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Poemas sobre los días de una niña y su hermano pequeño a lo largo de las estaciones, del barro de la primavera a la nieve del invierno.",
+        "en": "Rhymes following a little girl and her baby brother through the seasons, from spring puddles to winter snow."
+      },
+      "firstPublished": 1988,
+      "publisher": "Walker Books",
+      "year": 2016,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 56,
+      "size": {
+        "h": 260,
+        "w": 214,
+        "t": 6.9,
+        "source": "amazon"
+      },
+      "isbn": "9781406372427",
+      "spine": "spines/out-and-about.jpg",
+      "color": "#766146",
+      "cover": "covers/out-and-about.jpg"
+    },
+    {
+      "slug": "elmer",
+      "shelf": "en",
+      "title": "Elmer",
+      "authors": [
+        "David McKee"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Elmer es un elefante de cuadros de colores que quiere ser gris como los demás, hasta que descubre que a la manada le gusta tal como es.",
+        "en": "Elmer, a patchwork elephant, tries to be grey like the others, until he finds the herd loves him just as he is."
+      },
+      "firstPublished": 1989,
+      "publisher": "Andersen Press",
+      "year": 2007,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 280,
+        "w": 244,
+        "t": 6.5,
+        "source": "amazon"
+      },
+      "isbn": "9781842707319",
+      "spine": "spines/elmer.jpg",
+      "color": "#6c5647",
+      "cover": "covers/elmer.jpg"
+    },
+    {
+      "slug": "the-invisible-string",
+      "shelf": "en",
+      "title": "The Invisible String",
+      "authors": [
+        "Patrice Karst"
+      ],
+      "illustrators": [
+        "Joanne Lew-Vriethoff"
+      ],
+      "about": {
+        "es": "Dos hermanos que tienen miedo en una noche de tormenta aprenden que un hilo invisible de amor les une a la gente que quieren.",
+        "en": "Two children afraid of a storm learn that an invisible string of love ties them to everyone they love."
+      },
+      "firstPublished": 2000,
+      "publisher": "Little, Brown Books for Young Readers",
+      "year": 2018,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 40,
+      "size": {
+        "h": 254,
+        "w": 254,
+        "t": 4.0,
+        "source": "amazon"
+      },
+      "isbn": "9780316486231",
+      "spine": "spines/the-invisible-string.jpg",
+      "color": "#909386",
+      "cover": "covers/the-invisible-string.jpg"
+    },
+    {
+      "slug": "freddie-and-the-fairy",
+      "shelf": "en",
+      "title": "Freddie and the Fairy",
+      "authors": [
+        "Julia Donaldson"
+      ],
+      "illustrators": [
+        "Karen George"
+      ],
+      "about": {
+        "es": "Freddie habla tan bajito que el hada Bessie-Belle, que oye fatal, entiende mal todos sus deseos.",
+        "en": "Freddie mumbles, and Bessie-Belle the fairy can't hear well, so every wish he makes comes out wrong."
+      },
+      "firstPublished": 2010,
+      "publisher": "Macmillan Children's Books",
+      "year": 2021,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 279,
+        "w": 222,
+        "t": 4.9,
+        "source": "amazon"
+      },
+      "isbn": "9781529042528",
+      "spine": "spines/freddie-and-the-fairy.jpg",
+      "color": "#804440",
+      "cover": "covers/freddie-and-the-fairy.jpg"
+    },
+    {
+      "slug": "little-chick",
+      "shelf": "en",
+      "title": "Little Chick",
+      "authors": [],
+      "illustrators": [],
+      "about": {
+        "es": "Un pollito rompe el cascarón y sale a descubrir el mundo, hasta convertirse en un pájaro adulto.",
+        "en": "A little chick breaks out of its shell into the world around it, and grows into a bird."
+      },
+      "publisher": "Autumn Publishing",
+      "year": 2020,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 24,
+      "size": {
+        "h": 250,
+        "w": 250,
+        "t": 1.8,
+        "source": "amazon"
+      },
+      "isbn": "9781839030727",
+      "verify": [
+        "author (Libib only says Igloo Books)",
+        "summary (found by title; the Igloo ISBN differs)"
+      ],
+      "spine": "spines/little-chick.jpg",
+      "color": "#233c52",
+      "cover": "covers/little-chick.jpg"
+    },
+    {
+      "slug": "paddle-to-the-sea",
+      "shelf": "en",
+      "title": "Paddle-to-the-Sea",
+      "authors": [
+        "Holling C. Holling"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un niño talla una canoa pequeña con un remero dentro, y con los años la canoa viaja por los Grandes Lagos hasta el mar.",
+        "en": "A boy carves a small canoe with a paddler in it, and over the years it travels through the Great Lakes all the way to the sea."
+      },
+      "firstPublished": 1941,
+      "publisher": "Houghton Mifflin",
+      "year": 1984,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 64,
+      "size": {
+        "h": 279,
+        "w": 219,
+        "t": 5.8,
+        "source": "amazon"
+      },
+      "isbn": "9780395292037",
+      "spine": "spines/paddle-to-the-sea.jpg",
+      "color": "#387a98",
+      "cover": "covers/paddle-to-the-sea.jpg"
+    },
+    {
+      "slug": "a-visitor-for-bear",
+      "shelf": "en",
+      "title": "A Visitor for Bear",
+      "authors": [
+        "Bonny Becker"
+      ],
+      "illustrators": [
+        "Kady MacDonald Denton"
+      ],
+      "about": {
+        "es": "Oso no quiere visitas, pero un ratón muy educado no para de colarse en su casa hasta que se hacen amigos.",
+        "en": "Bear does not want visitors, but a polite little mouse keeps getting in, until they become friends."
+      },
+      "firstPublished": 2008,
+      "publisher": "Candlewick Press",
+      "year": 2012,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 56,
+      "size": {
+        "h": 235,
+        "w": 270,
+        "t": 5.5,
+        "source": "amazon"
+      },
+      "isbn": "9780763646110",
+      "spine": "spines/a-visitor-for-bear.jpg",
+      "color": "#7e8d92",
+      "cover": "covers/a-visitor-for-bear.jpg"
+    },
+    {
+      "slug": "the-tiger-who-came-to-tea",
+      "shelf": "en",
+      "title": "The Tiger Who Came to Tea",
+      "authors": [
+        "Judith Kerr"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un tigre llama a la puerta de Sophie a la hora de la merienda y se come y se bebe todo lo que hay en la casa.",
+        "en": "A tiger knocks on Sophie's door at teatime and eats and drinks everything in the house."
+      },
+      "firstPublished": 1968,
+      "publisher": "HarperCollins Children's Books",
+      "year": 2006,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 279,
+        "w": 190,
+        "t": 3.3,
+        "source": "photo"
+      },
+      "isbn": "9780007215997",
+      "spine": "spines/the-tiger-who-came-to-tea.jpg",
+      "color": "#c1b9a8",
+      "cover": "covers/the-tiger-who-came-to-tea.jpg"
+    },
+    {
+      "slug": "the-snowman",
+      "shelf": "en",
+      "title": "The Snowman",
+      "authors": [
+        "Raymond Briggs"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un niño hace un muñeco de nieve que cobra vida por la noche y se lo lleva volando; sin palabras.",
+        "en": "A boy's snowman comes to life in the night and takes him flying; told in pictures, without words."
+      },
+      "firstPublished": 1978,
+      "publisher": "Puffin",
+      "year": 2013,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 285,
+        "w": 227,
+        "t": 5.1,
+        "source": "amazon"
+      },
+      "isbn": "9780723275534",
+      "spine": "spines/the-snowman.jpg",
+      "color": "#b7ad9d",
+      "cover": "covers/the-snowman.jpg"
+    },
+    {
+      "slug": "madeline",
+      "shelf": "en",
+      "title": "Madeline",
+      "authors": [
+        "Ludwig Bemelmans"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Madeline, la más pequeña y valiente de doce niñas de un internado de París, acaba en el hospital con apendicitis.",
+        "en": "Madeline, the smallest and bravest of twelve girls at a Paris boarding school, ends up in hospital with appendicitis."
+      },
+      "firstPublished": 1939,
+      "publisher": "Scholastic",
+      "year": 2009,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 48,
+      "size": {
+        "h": 304,
+        "w": 224,
+        "t": 6.9,
+        "source": "photo"
+      },
+      "isbn": "9781407110530",
+      "spine": "spines/madeline.jpg",
+      "color": "#bb9429",
+      "cover": "covers/madeline.jpg"
+    },
+    {
+      "slug": "mog-the-forgetful-cat",
+      "shelf": "en",
+      "title": "Mog the Forgetful Cat",
+      "authors": [
+        "Judith Kerr"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Mog, una gata que se olvida de todo, acaba por casualidad atrapando a un ladrón.",
+        "en": "Mog, a cat who forgets everything, ends up catching a burglar by accident."
+      },
+      "firstPublished": 1970,
+      "publisher": "HarperCollins Children's Books",
+      "year": 2005,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 40,
+      "size": {
+        "h": 280,
+        "w": 206,
+        "t": 6.1,
+        "source": "amazon"
+      },
+      "isbn": "9780007171347",
+      "spine": "spines/mog-the-forgetful-cat.jpg",
+      "color": "#40543c",
+      "cover": "covers/mog-the-forgetful-cat.jpg"
+    },
+    {
+      "slug": "the-truth-about-max",
+      "shelf": "en",
+      "title": "The Truth About Max",
+      "authors": [
+        "Alice Provensen",
+        "Martin Provensen"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Max, el gato de la granja Maple Hill, es travieso, listo e independiente, y por la noche tiene su propia vida secreta.",
+        "en": "Max, the cat of Maple Hill Farm, is mischievous, clever and independent, with a private life that starts at night."
+      },
+      "publisher": "Enchanted Lion Books",
+      "year": 2023,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 40,
+      "size": {
+        "h": 279,
+        "w": 196,
+        "t": 11.1,
+        "source": "amazon"
+      },
+      "isbn": "9781592703753",
+      "spine": "spines/the-truth-about-max.jpg",
+      "color": "#a89267",
+      "cover": "covers/the-truth-about-max.jpg"
+    },
+    {
+      "slug": "the-patchwork-cat",
+      "shelf": "en",
+      "title": "The Patchwork Cat",
+      "authors": [
+        "William Mayne"
+      ],
+      "illustrators": [
+        "Nicola Bayley"
+      ],
+      "about": {
+        "es": "Tabby adora su colcha de retales, y cuando la tiran a la basura la sigue hasta el vertedero para recuperarla.",
+        "en": "Tabby loves her patchwork quilt, and when it is thrown out she follows it to the rubbish dump to bring it home."
+      },
+      "firstPublished": 1981,
+      "publisher": "Red Fox",
+      "year": 1993,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 251,
+        "w": 201,
+        "t": 4.9,
+        "source": "photo"
+      },
+      "isbn": "9780099983200",
+      "spine": "spines/the-patchwork-cat.jpg",
+      "color": "#8d8681",
+      "cover": "covers/the-patchwork-cat.jpg"
+    },
+    {
+      "slug": "mr-gumpy-s-outing",
+      "shelf": "en",
+      "title": "Mr Gumpy's Outing",
+      "authors": [
+        "John Burningham"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "El señor Gumpy sale en barca y deja subir a niños y animales si se portan bien, pero no se portan bien y la barca vuelca.",
+        "en": "Mr Gumpy takes his boat out and lets children and animals aboard if they behave, but they don't, and the boat tips over."
+      },
+      "firstPublished": 1970,
+      "publisher": "Red Fox",
+      "year": 2001,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 250,
+        "w": 246,
+        "t": 4.0,
+        "source": "amazon"
+      },
+      "isbn": "9780099408796",
+      "spine": "spines/mr-gumpy-s-outing.jpg",
+      "color": "#57302f",
+      "cover": "covers/mr-gumpy-s-outing.jpg"
+    },
+    {
+      "slug": "whiskers-rhymes",
+      "shelf": "en",
+      "title": "Whiskers & Rhymes",
+      "authors": [
+        "Arnold Lobel"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Rimas cortas y juguetonas protagonizadas por gatos, al estilo de las canciones infantiles inglesas.",
+        "en": "Short, playful rhymes about cats, in the style of English nursery rhymes."
+      },
+      "publisher": "Lothrop, Lee & Shepard",
+      "year": 1985,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 48,
+      "size": {
+        "h": 208,
+        "w": 253,
+        "t": 10.8,
+        "source": "photo"
+      },
+      "isbn": "9780688038359",
+      "spine": "spines/whiskers-rhymes.jpg",
+      "cover": "covers/whiskers-rhymes.jpg",
+      "color": "#312729"
+    },
+    {
+      "slug": "shh-we-have-a-plan",
+      "shelf": "en",
+      "title": "Shh! We Have a Plan",
+      "authors": [
+        "Chris Haughton"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Cuatro amigos intentan cazar un pájaro con una red, y su plan sale mal una y otra vez.",
+        "en": "Four friends creep through the woods trying to catch a bird with a net, and their plan goes wrong every time."
+      },
+      "firstPublished": 2014,
+      "publisher": "Walker Books",
+      "year": 2015,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 40,
+      "size": {
+        "h": 260,
+        "w": 250,
+        "t": 6.5,
+        "source": "amazon"
+      },
+      "isbn": "9781406360035",
+      "spine": "spines/shh-we-have-a-plan.jpg",
+      "color": "#387190",
+      "cover": "covers/shh-we-have-a-plan.jpg"
+    },
+    {
+      "slug": "luna-loves-sport",
+      "shelf": "en",
+      "title": "Luna Loves Sport",
+      "authors": [
+        "Joseph Coelho"
+      ],
+      "illustrators": [
+        "Fiona Lumbers"
+      ],
+      "about": {
+        "es": "A Luna no se le dan bien los deportes, pero el día de las competiciones del colegio decide probarlo todo y descubre que no hace falta ser la mejor para pasarlo bien.",
+        "en": "Luna doesn't think she is good at sport, but on school sports day she tries everything and finds you don't need to be the best to enjoy it."
+      },
+      "publisher": "Andersen Press",
+      "year": 2026,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 282,
+        "w": 243,
+        "t": 9.1,
+        "source": "amazon"
+      },
+      "isbn": "9781839136535",
+      "spine": "spines/luna-loves-sport.jpg",
+      "color": "#a04f3d",
+      "cover": "covers/luna-loves-sport.jpg"
+    },
+    {
+      "slug": "a-house-is-a-house-for-me",
+      "shelf": "en",
+      "title": "A House Is a House for Me",
+      "authors": [
+        "Mary Ann Hoberman"
+      ],
+      "illustrators": [
+        "Betty Fraser"
+      ],
+      "about": {
+        "es": "Un poema que va enumerando las casas de todo: la colmena de las abejas, la cáscara del cacahuete, el guante de la mano.",
+        "en": "A rhyme listing the homes of everything, from a hive for a bee to a glove for a hand."
+      },
+      "firstPublished": 1978,
+      "publisher": "Penguin",
+      "year": 2007,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 48,
+      "size": {
+        "h": 279,
+        "w": 216,
+        "t": 4.3,
+        "source": "amazon"
+      },
+      "isbn": "9780142407738",
+      "spine": "spines/a-house-is-a-house-for-me.jpg",
+      "color": "#362e66",
+      "cover": "covers/a-house-is-a-house-for-me.jpg"
+    },
+    {
+      "slug": "oi-frog",
+      "shelf": "en",
+      "title": "Oi Frog!",
+      "authors": [
+        "Kes Gray"
+      ],
+      "illustrators": [
+        "Jim Field"
+      ],
+      "about": {
+        "es": "Gato le explica a Rana que las ranas se sientan en troncos, y que cada animal se sienta en algo que rima con su nombre.",
+        "en": "Cat tells Frog that frogs sit on logs, and that every animal has to sit on something that rhymes with its name."
+      },
+      "firstPublished": 2014,
+      "publisher": "Hodder Children's Books",
+      "year": 2015,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 245,
+        "w": 245,
+        "t": 5.2,
+        "source": "amazon"
+      },
+      "isbn": "9781444910865",
+      "spine": "spines/oi-frog.jpg",
+      "color": "#9c852c",
+      "cover": "covers/oi-frog.jpg"
+    },
+    {
+      "slug": "each-peach-pear-plum",
+      "shelf": "en",
+      "title": "Each Peach Pear Plum",
+      "authors": [
+        "Janet Ahlberg",
+        "Allan Ahlberg"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un juego de veo veo con personajes de cuentos y canciones escondidos en cada ilustración.",
+        "en": "An I-spy game with nursery-rhyme and fairy-tale characters hidden in each picture."
+      },
+      "firstPublished": 1978,
+      "publisher": "Penguin",
+      "year": 1986,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 180,
+        "w": 231,
+        "t": 4.0,
+        "source": "photo"
+      },
+      "isbn": "9780140506396",
+      "spine": "spines/each-peach-pear-plum.jpg",
+      "color": "#7c8480",
+      "cover": "covers/each-peach-pear-plum.jpg"
+    },
+    {
+      "slug": "the-owl-and-the-pussycat",
+      "shelf": "en",
+      "title": "The Owl and the Pussycat",
+      "authors": [
+        "Edward Lear"
+      ],
+      "illustrators": [
+        "Ian Beck"
+      ],
+      "about": {
+        "es": "El búho y la gatita se hacen a la mar en un barco verde guisante, se casan y bailan a la luz de la luna; el poema de Edward Lear.",
+        "en": "The owl and the pussycat go to sea in a pea-green boat, marry and dance by the light of the moon; Edward Lear's poem."
+      },
+      "publisher": "Corgi Children's",
+      "year": 1996,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 264,
+        "w": 220,
+        "t": 3.9,
+        "source": "amazon"
+      },
+      "isbn": "9780552528191",
+      "spine": "spines/the-owl-and-the-pussycat.jpg",
+      "color": "#7f8886",
+      "cover": "covers/the-owl-and-the-pussycat.jpg"
+    },
+    {
+      "slug": "blueberries-for-sal",
+      "shelf": "en",
+      "title": "Blueberries for Sal",
+      "authors": [
+        "Robert McCloskey"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Sal y su madre van a coger arándanos, igual que una osa y su osezno, y los pequeños acaban siguiendo a la madre equivocada.",
+        "en": "Sal and her mother go blueberry picking, as do a mother bear and her cub, and the two little ones end up following the wrong mother."
+      },
+      "firstPublished": 1948,
+      "publisher": "Penguin Australia",
+      "year": 1976,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 59,
+      "size": {
+        "h": 175,
+        "w": 229,
+        "t": 7.4,
+        "source": "photo"
+      },
+      "isbn": "9780140501698",
+      "spine": "spines/blueberries-for-sal.jpg",
+      "color": "#222a36",
+      "cover": "covers/blueberries-for-sal.jpg"
+    },
+    {
+      "slug": "a-birthday-for-frances",
+      "shelf": "en",
+      "title": "A Birthday for Frances",
+      "authors": [
+        "Russell Hoban"
+      ],
+      "illustrators": [
+        "Lillian Hoban"
+      ],
+      "about": {
+        "es": "A Frances le da envidia el cumpleaños de su hermana Gloria, y le cuesta mucho no comerse la chocolatina que le ha comprado de regalo.",
+        "en": "Frances is jealous of her little sister Gloria's birthday, and finds it very hard not to eat the chocolate bar she has bought her as a present."
+      },
+      "firstPublished": 1968,
+      "publisher": "HarperCollins Publishers",
+      "year": 1994,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 254,
+        "w": 197,
+        "t": 3.2,
+        "source": "amazon"
+      },
+      "isbn": "9780064430074",
+      "spine": "spines/a-birthday-for-frances.jpg",
+      "color": "#846f89",
+      "cover": "covers/a-birthday-for-frances.jpg"
+    },
+    {
+      "slug": "i-need-a-hug",
+      "shelf": "en",
+      "title": "I Need a Hug",
+      "authors": [
+        "Aaron Blabey"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un pequeño puercoespín solo quiere un abrazo, pero todos huyen de sus púas.",
+        "en": "A little porcupine just wants a hug, but everyone runs away from his prickles."
+      },
+      "publisher": "Scholastic",
+      "year": 2015,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 24,
+      "size": {
+        "h": 246,
+        "w": 236,
+        "t": 4.0,
+        "source": "amazon"
+      },
+      "isbn": "9781407171586",
+      "spine": "spines/i-need-a-hug.jpg",
+      "color": "#387399",
+      "cover": "covers/i-need-a-hug.jpg"
+    },
+    {
+      "slug": "the-disgusting-sandwich",
+      "shelf": "en",
+      "title": "The Disgusting Sandwich",
+      "authors": [
+        "Gareth Edwards"
+      ],
+      "illustrators": [
+        "Hannah Shaw"
+      ],
+      "about": {
+        "es": "Un tejón sueña con un bocadillo que se le cae a un niño en el parque, y que se va poniendo más asqueroso a cada animal que lo pisa.",
+        "en": "A badger longs for a sandwich dropped in the park, which gets more disgusting as it passes from animal to animal."
+      },
+      "publisher": "Alison Green Books",
+      "year": 2013,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 276,
+        "w": 251,
+        "t": 3.4,
+        "source": "amazon"
+      },
+      "isbn": "9781407131450",
+      "spine": "spines/the-disgusting-sandwich.jpg",
+      "color": "#9a8677",
+      "cover": "covers/the-disgusting-sandwich.jpg"
+    },
+    {
+      "slug": "the-baby-s-catalogue",
+      "shelf": "en",
+      "title": "The Baby's Catalogue",
+      "authors": [
+        "Janet Ahlberg",
+        "Allan Ahlberg"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un catálogo del día de cinco bebés y sus familias: mamás, papás, juguetes, comidas, baños y camas.",
+        "en": "A catalogue of the day of five babies and their families: mums, dads, toys, meals, baths and beds."
+      },
+      "firstPublished": 1982,
+      "publisher": "Puffin",
+      "year": 1984,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 230,
+        "w": 250,
+        "t": 4.1,
+        "source": "amazon"
+      },
+      "isbn": "9780140503852",
+      "spine": "spines/the-baby-s-catalogue.jpg",
+      "color": "#808274",
+      "cover": "covers/the-baby-s-catalogue.jpg"
+    },
+    {
+      "slug": "red-is-best",
+      "shelf": "en",
+      "title": "Red Is Best",
+      "authors": [
+        "Kathy Stinson"
+      ],
+      "illustrators": [
+        "Robin Baird Lewis"
+      ],
+      "about": {
+        "es": "Para Kelly, todo lo rojo es mejor, y tiene una razón para cada cosa roja que su madre no entiende.",
+        "en": "Kelly knows red is best, and has a reason for every red thing her mum doesn't understand."
+      },
+      "firstPublished": 1982,
+      "publisher": "Annick Press",
+      "year": 2006,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 203,
+        "w": 202,
+        "t": 4.9,
+        "source": "amazon"
+      },
+      "isbn": "9781554510511",
+      "spine": "spines/red-is-best.jpg",
+      "color": "#48332f",
+      "cover": "covers/red-is-best.jpg"
+    },
+    {
+      "slug": "the-snowy-day",
+      "shelf": "en",
+      "title": "The Snowy Day",
+      "authors": [
+        "Ezra Jack Keats"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Peter se despierta y la ciudad está nevada, y pasa el día jugando en la nieve.",
+        "en": "Peter wakes to find the city covered in snow and spends the day exploring it."
+      },
+      "firstPublished": 1962,
+      "publisher": "Puffin",
+      "year": null,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 180,
+        "w": 214,
+        "t": 3.4,
+        "source": "photo"
+      },
+      "isbn": "9780140501827",
+      "verify": [
+        "edition year (missing in Libib)"
+      ],
+      "spine": "spines/the-snowy-day.jpg",
+      "color": "#a04039",
+      "cover": "covers/the-snowy-day.jpg"
+    },
+    {
+      "slug": "who-sank-the-boat",
+      "shelf": "en",
+      "title": "Who Sank the Boat?",
+      "authors": [
+        "Pamela Allen"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Una vaca, un burro, una oveja, un cerdo y un ratón suben a una barca: ¿quién la hundió?",
+        "en": "A cow, a donkey, a sheep, a pig and a little mouse get into a boat: who sank it?"
+      },
+      "firstPublished": 1982,
+      "publisher": "Puffin",
+      "year": 1988,
+      "lang": "en",
+      "binding": "paperback",
+      "pages": 32,
+      "size": {
+        "h": 178,
+        "w": 216,
+        "t": 3.8,
+        "source": "photo"
+      },
+      "isbn": "9780140509403",
+      "spine": "spines/who-sank-the-boat.jpg",
+      "color": "#966a2a",
+      "cover": "covers/who-sank-the-boat.jpg"
+    },
+    {
+      "slug": "little-bee-s-book-of-blooms",
+      "shelf": "en",
+      "title": "Little Bee's Book of Blooms",
+      "authors": [
+        "Yuval Zommer"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Una abejita visita flor tras flor, y con ella se aprenden sus nombres y colores.",
+        "en": "A little bee visits flower after flower, introducing their names and colours."
+      },
+      "publisher": "Thames & Hudson",
+      "year": 2025,
+      "lang": "en",
+      "binding": "board",
+      "pages": 24,
+      "size": {
+        "h": 218,
+        "w": 150,
+        "t": 19.0,
+        "source": "amazon"
+      },
+      "isbn": "9780500653746",
+      "spine": "spines/little-bee-s-book-of-blooms.jpg",
+      "color": "#6e8e8d",
+      "cover": "covers/little-bee-s-book-of-blooms.jpg"
+    },
+    {
+      "slug": "lost-and-found",
+      "shelf": "en",
+      "title": "Lost and Found",
+      "authors": [
+        "Oliver Jeffers"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un niño encuentra un pingüino en su puerta y rema con él hasta el Polo Sur, pero lo que el pingüino quería era un amigo.",
+        "en": "A boy finds a penguin at his door and rows it all the way to the South Pole, only to find it was lonely and wanted a friend."
+      },
+      "firstPublished": 2005,
+      "publisher": "HarperCollins Children's Books",
+      "year": 2014,
+      "lang": "en",
+      "binding": "board",
+      "pages": 32,
+      "size": {
+        "h": 200,
+        "w": 188,
+        "t": 22.2,
+        "source": "amazon"
+      },
+      "isbn": "9780007549238",
+      "spine": "spines/lost-and-found.jpg",
+      "color": "#80a5af",
+      "cover": "covers/lost-and-found.jpg"
+    },
+    {
+      "slug": "frog-is-frightened",
+      "shelf": "en",
+      "title": "Frog Is Frightened",
+      "authors": [
+        "Max Velthuijs"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Rana oye ruidos raros por la noche y corre a casa de Pato y Cerdito, que también tienen miedo.",
+        "en": "Frog hears strange noises in the night and runs to Duck and Pig, who turn out to be scared too."
+      },
+      "publisher": "Andersen Press",
+      "year": 1994,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 32,
+      "size": {
+        "h": 243,
+        "w": 226,
+        "t": 9.7,
+        "source": "photo"
+      },
+      "isbn": "9780862645175",
+      "verify": [
+        "original Dutch title"
+      ],
+      "spine": "spines/frog-is-frightened.jpg",
+      "color": "#b78157",
+      "cover": "covers/frog-is-frightened.jpg"
+    },
+    {
+      "slug": "the-poky-little-puppy",
+      "shelf": "en",
+      "title": "The Poky Little Puppy",
+      "series": "Little Golden Book",
+      "authors": [
+        "Janette Sebring Lowrey"
+      ],
+      "illustrators": [
+        "Gustaf Tenggren"
+      ],
+      "about": {
+        "es": "El cachorro más lento de cinco hermanos se entretiene siempre por el camino y se queda sin postre.",
+        "en": "The slowest of five puppies always dawdles on the way home, and misses out on pudding."
+      },
+      "firstPublished": 1942,
+      "publisher": "Golden Books",
+      "year": 2010,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 24,
+      "size": {
+        "h": 206,
+        "w": 171,
+        "t": 5.5,
+        "source": "photo"
+      },
+      "isbn": "9780307021342",
+      "spine": "spines/the-poky-little-puppy.jpg",
+      "color": "#5a4d38",
+      "cover": "covers/the-poky-little-puppy.jpg"
+    },
+    {
+      "slug": "i-want-my-hat-back",
+      "shelf": "en",
+      "title": "I Want My Hat Back",
+      "authors": [
+        "Jon Klassen"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un oso ha perdido su gorro y pregunta a todos los animales si lo han visto, hasta que se da cuenta de quién lo llevaba puesto.",
+        "en": "A bear has lost his hat and asks every animal if they have seen it, until he realises who was wearing it."
+      },
+      "firstPublished": 2011,
+      "publisher": "Candlewick Press",
+      "year": null,
+      "lang": "en",
+      "binding": "board",
+      "pages": 32,
+      "size": {
+        "h": 191,
+        "w": 136,
+        "t": 16.8,
+        "source": "amazon"
+      },
+      "isbn": "9781536207576",
+      "verify": [
+        "edition year (Libib says 1900)"
+      ],
+      "spine": "spines/i-want-my-hat-back.jpg",
+      "color": "#bababa",
+      "cover": "covers/i-want-my-hat-back.jpg"
+    },
+    {
+      "slug": "peepo",
+      "shelf": "en",
+      "title": "Peepo!",
+      "authors": [
+        "Janet Ahlberg",
+        "Allan Ahlberg"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un día en la vida de un bebé durante la guerra, visto a través de agujeros en las páginas.",
+        "en": "A baby's day in wartime Britain, seen through peepholes cut in the pages."
+      },
+      "firstPublished": 1981,
+      "publisher": "Puffin",
+      "year": 2011,
+      "lang": "en",
+      "binding": "board",
+      "pages": 34,
+      "size": {
+        "h": 151,
+        "w": 169,
+        "t": 19.2,
+        "source": "photo"
+      },
+      "isbn": "9780141337425",
+      "spine": "spines/peepo.jpg",
+      "color": "#922529",
+      "cover": "covers/peepo.jpg"
+    },
+    {
+      "slug": "brown-bear-brown-bear-what-do-you-see",
+      "shelf": "en",
+      "title": "Brown Bear, Brown Bear, What Do You See?",
+      "authors": [
+        "Bill Martin Jr"
+      ],
+      "illustrators": [
+        "Eric Carle"
+      ],
+      "about": {
+        "es": "Un oso pardo, un pájaro rojo, un pato amarillo: cada animal ve al siguiente, en una cadena rimada.",
+        "en": "A brown bear, a red bird, a yellow duck: each animal sees the next, in a rhyming chain."
+      },
+      "firstPublished": 1967,
+      "publisher": "Henry Holt",
+      "year": 1999,
+      "lang": "en",
+      "binding": "board",
+      "pages": 24,
+      "size": {
+        "h": 177,
+        "w": 134,
+        "t": 17.4,
+        "source": "amazon"
+      },
+      "isbn": "9780805047905",
+      "spine": "spines/brown-bear-brown-bear-what-do-you-see.jpg",
+      "color": "#bcb9b4",
+      "cover": "covers/brown-bear-brown-bear-what-do-you-see.jpg"
+    },
+    {
+      "slug": "what-the-ladybird-heard-on-holiday",
+      "shelf": "en",
+      "title": "What the Ladybird Heard on Holiday",
+      "authors": [
+        "Julia Donaldson"
+      ],
+      "illustrators": [
+        "Lydia Monks"
+      ],
+      "about": {
+        "es": "De vacaciones en Londres, la mariquita oye a dos ladrones planear el robo de la corona de la reina, y con los corgis frustra el plan.",
+        "en": "On holiday in London, the ladybird overhears two thieves plotting to steal the Queen's crown, and foils them with the help of the corgis."
+      },
+      "publisher": "Macmillan Children's Books",
+      "year": 2022,
+      "lang": "en",
+      "binding": "board",
+      "pages": 30,
+      "size": {
+        "h": 187,
+        "w": 187,
+        "t": 26.5,
+        "source": "amazon"
+      },
+      "isbn": "9781529082180",
+      "spine": "spines/what-the-ladybird-heard-on-holiday.jpg",
+      "color": "#a07345",
+      "cover": "covers/what-the-ladybird-heard-on-holiday.jpg"
+    },
+    {
+      "slug": "the-snail-and-the-whale",
+      "shelf": "en",
+      "title": "The Snail and the Whale",
+      "authors": [
+        "Julia Donaldson"
+      ],
+      "illustrators": [
+        "Axel Scheffler"
+      ],
+      "about": {
+        "es": "Un caracol pequeñito da la vuelta al mundo sobre la cola de una ballena, y luego la salva cuando queda varada.",
+        "en": "A tiny snail sails around the world on the tail of a whale, then saves the whale when it is stranded."
+      },
+      "firstPublished": 2003,
+      "publisher": "Pan Macmillan",
+      "year": 2017,
+      "lang": "en",
+      "binding": "board",
+      "pages": 24,
+      "size": {
+        "h": 174,
+        "w": 193,
+        "t": 22.3,
+        "source": "amazon"
+      },
+      "isbn": "9781509830442",
+      "spine": "spines/the-snail-and-the-whale.jpg",
+      "color": "#5889b1",
+      "cover": "covers/the-snail-and-the-whale.jpg"
+    },
+    {
+      "slug": "that-s-not-my-kitten",
+      "shelf": "en",
+      "title": "That's Not My Kitten…",
+      "authors": [
+        "Fiona Watt"
+      ],
+      "illustrators": [
+        "Rachel Wells"
+      ],
+      "about": {
+        "es": "Página a página se tocan gatitos que no son el mío, hasta encontrar el de verdad.",
+        "en": "Page after page of kittens to touch that aren't mine, until the right one turns up."
+      },
+      "publisher": "Usborne",
+      "year": 2006,
+      "lang": "en",
+      "binding": "board",
+      "pages": 10,
+      "size": {
+        "h": 164,
+        "w": 164,
+        "t": 24.0,
+        "source": "amazon"
+      },
+      "isbn": "9780746071489",
+      "spine": "spines/that-s-not-my-kitten.jpg",
+      "color": "#98c9db",
+      "cover": "covers/that-s-not-my-kitten.jpg"
+    },
+    {
+      "slug": "we-re-going-on-a-bear-hunt",
+      "shelf": "en",
+      "title": "We're Going on a Bear Hunt",
+      "authors": [
+        "Michael Rosen"
+      ],
+      "illustrators": [
+        "Helen Oxenbury"
+      ],
+      "about": {
+        "es": "Una familia sale a cazar un oso, cruzando hierba, río, barro y bosque, hasta que encuentra uno de verdad y vuelve corriendo a casa.",
+        "en": "A family goes on a bear hunt through grass, river, mud and forest, until they find a real bear and run all the way home."
+      },
+      "firstPublished": 1989,
+      "publisher": "Walker Books",
+      "year": 2015,
+      "lang": "en",
+      "binding": "board",
+      "pages": 36,
+      "size": {
+        "h": 160,
+        "w": 185,
+        "t": 21.1,
+        "source": "amazon"
+      },
+      "isbn": "9781406363074",
+      "spine": "spines/we-re-going-on-a-bear-hunt.jpg",
+      "color": "#aeb8c2",
+      "cover": "covers/we-re-going-on-a-bear-hunt.jpg"
+    },
+    {
+      "slug": "corduroy",
+      "shelf": "en",
+      "title": "Corduroy",
+      "authors": [
+        "Don Freeman"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Corduroy, un osito de peluche de unos grandes almacenes, busca su botón perdido para que alguien se lo lleve a casa.",
+        "en": "Corduroy, a teddy bear in a department store, goes looking for his lost button so someone will take him home."
+      },
+      "firstPublished": 1968,
+      "publisher": "Viking",
+      "year": 2014,
+      "lang": "en",
+      "binding": "board",
+      "pages": 32,
+      "size": {
+        "h": 127,
+        "w": 165,
+        "t": 18.2,
+        "source": "amazon"
+      },
+      "isbn": "9780451470799",
+      "spine": "spines/corduroy.jpg",
+      "color": "#be4147",
+      "cover": "covers/corduroy.jpg"
+    },
+    {
+      "slug": "a-flock-of-gulls-a-chorus-of-frogs",
+      "shelf": "en",
+      "title": "A Flock of Gulls, a Chorus of Frogs",
+      "series": "First West Coast Books",
+      "authors": [
+        "Roy Henry Vickers",
+        "Lucky Budd"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Los nombres colectivos de los animales de la costa oeste de Canadá, como una bandada de gaviotas o un coro de ranas.",
+        "en": "The collective names of animals of Canada's West Coast, such as a flock of gulls and a chorus of frogs."
+      },
+      "publisher": "Harbour Publishing",
+      "year": 2024,
+      "lang": "en",
+      "binding": "board",
+      "pages": 24,
+      "size": {
+        "h": 127,
+        "w": 182,
+        "t": 13.7,
+        "source": "amazon"
+      },
+      "isbn": "9781990776502",
+      "spine": "spines/a-flock-of-gulls-a-chorus-of-frogs.jpg",
+      "color": "#d8dcbd",
+      "cover": "covers/a-flock-of-gulls-a-chorus-of-frogs.jpg"
+    },
+    {
+      "slug": "blue-hat-green-hat",
+      "shelf": "en",
+      "title": "Blue Hat, Green Hat",
+      "authors": [
+        "Sandra Boynton"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Unos animales se visten correctamente, y un pavo se equivoca con cada prenda.",
+        "en": "Some animals get dressed properly, and a turkey gets every piece of clothing wrong."
+      },
+      "firstPublished": 1984,
+      "publisher": "Simon & Schuster",
+      "year": 2003,
+      "lang": "en",
+      "binding": "board",
+      "pages": 14,
+      "size": {
+        "h": 143,
+        "w": 143,
+        "t": 15.4,
+        "source": "amazon"
+      },
+      "isbn": "9780671493202",
+      "spine": "spines/blue-hat-green-hat.jpg",
+      "color": "#c1be86",
+      "cover": "covers/blue-hat-green-hat.jpg"
+    },
+    {
+      "slug": "lyle-lyle-crocodile",
+      "shelf": "en",
+      "title": "Lyle, Lyle, Crocodile",
+      "authors": [
+        "Bernard Waber"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Lyle es un cocodrilo que vive con una familia en Nueva York, y el vecino de al lado, el señor Grumps, no lo soporta.",
+        "en": "Lyle is a crocodile who lives with a family in New York, and Mr Grumps next door can't stand him."
+      },
+      "firstPublished": 1965,
+      "publisher": "HarperCollins Publishers",
+      "year": 2020,
+      "lang": "en",
+      "binding": "board",
+      "pages": 22,
+      "size": {
+        "h": 191,
+        "w": 172,
+        "t": 13.6,
+        "source": "amazon"
+      },
+      "isbn": "9780358272618",
+      "spine": "spines/lyle-lyle-crocodile.jpg",
+      "color": "#7b9349",
+      "cover": "covers/lyle-lyle-crocodile.jpg"
+    },
+    {
+      "slug": "rabbit-s-nap",
+      "shelf": "en",
+      "title": "Rabbit's Nap",
+      "series": "Tales from Acorn Wood",
+      "authors": [
+        "Julia Donaldson"
+      ],
+      "illustrators": [
+        "Axel Scheffler"
+      ],
+      "about": {
+        "es": "Conejo quiere echarse la siesta, pero en cada sitio que prueba hay alguien que le despierta; con solapas.",
+        "en": "Rabbit wants a nap, but wherever he tries, someone wakes him up; with flaps to lift."
+      },
+      "firstPublished": 2000,
+      "publisher": "Macmillan Children's Books",
+      "year": 2015,
+      "lang": "en",
+      "binding": "board",
+      "pages": 12,
+      "size": {
+        "h": 172,
+        "w": 208,
+        "t": 22.9,
+        "source": "photo"
+      },
+      "isbn": "9781447273417",
+      "spine": "spines/rabbit-s-nap.jpg",
+      "color": "#5e88b8",
+      "cover": "covers/rabbit-s-nap.jpg"
+    },
+    {
+      "slug": "west-coast-wild-abc",
+      "shelf": "en",
+      "title": "West Coast Wild ABC",
+      "authors": [
+        "Deborah Hodge"
+      ],
+      "illustrators": [
+        "Karen Reczuch"
+      ],
+      "about": {
+        "es": "Un abecedario de los animales y paisajes de la costa del Pacífico de Canadá.",
+        "en": "An alphabet of the animals and wild places of Canada's Pacific coast."
+      },
+      "publisher": "Groundwood Books",
+      "year": 2022,
+      "lang": "en",
+      "binding": "board",
+      "pages": 26,
+      "size": {
+        "h": 203,
+        "w": 152,
+        "t": 16.2,
+        "source": "amazon"
+      },
+      "isbn": "9781773066219",
+      "spine": "spines/west-coast-wild-abc.jpg",
+      "color": "#4a86a4",
+      "cover": "covers/west-coast-wild-abc.jpg"
+    },
+    {
+      "slug": "moo-baa-la-la-la",
+      "shelf": "en",
+      "title": "Moo, Baa, La La La!",
+      "authors": [
+        "Sandra Boynton"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Las vacas mugen, las ovejas balan y tres cerditos cantan la, la, la: los sonidos de los animales.",
+        "en": "Cows moo, sheep baa and three singing pigs go la la la: a book of animal sounds."
+      },
+      "firstPublished": 1982,
+      "publisher": "Simon & Schuster",
+      "year": 2003,
+      "lang": "en",
+      "binding": "board",
+      "pages": 14,
+      "size": {
+        "h": 143,
+        "w": 143,
+        "t": 11.7,
+        "source": "amazon"
+      },
+      "isbn": "9780671449018",
+      "spine": "spines/moo-baa-la-la-la.jpg",
+      "color": "#7498a3",
+      "cover": "covers/moo-baa-la-la-la.jpg"
+    },
+    {
+      "slug": "doggies",
+      "shelf": "en",
+      "title": "Doggies",
+      "authors": [
+        "Sandra Boynton"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Un libro para contar del uno al diez, con perros que ladran cada uno a su manera.",
+        "en": "A counting book from one to ten, with dogs that each bark in their own way."
+      },
+      "firstPublished": 1984,
+      "publisher": "Simon & Schuster",
+      "year": 1984,
+      "lang": "en",
+      "binding": "board",
+      "pages": 14,
+      "size": {
+        "h": 143,
+        "w": 143,
+        "t": 10.1,
+        "source": "amazon"
+      },
+      "isbn": "9780671493189",
+      "spine": "spines/doggies.jpg",
+      "color": "#6188b0",
+      "cover": "covers/doggies.jpg"
+    },
+    {
+      "slug": "zog",
+      "shelf": "en",
+      "title": "Zog",
+      "authors": [
+        "Julia Donaldson"
+      ],
+      "illustrators": [
+        "Axel Scheffler"
+      ],
+      "about": {
+        "es": "Zog es el dragón más torpe de la escuela de dragones, y una princesa que quiere ser médica le cura cada golpe.",
+        "en": "Zog is the clumsiest dragon at dragon school, and a princess who wants to be a doctor patches up every bump."
+      },
+      "firstPublished": 2010,
+      "publisher": "Scholastic Press",
+      "year": 2016,
+      "lang": "en",
+      "binding": "board",
+      "pages": 32,
+      "size": {
+        "h": 192,
+        "w": 214,
+        "t": 26.1,
+        "source": "amazon"
+      },
+      "isbn": "9781407164939",
+      "spine": "spines/zog.jpg",
+      "color": "#58818d",
+      "cover": "covers/zog.jpg"
+    },
+    {
+      "slug": "peter-rabbit-a-christmas-wish",
+      "shelf": "en",
+      "title": "Peter Rabbit: A Christmas Wish",
+      "authors": [
+        "Beatrix Potter"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Es Nochebuena y Perico y sus hermanas han pedido un regalo especial, pero Perico no se puede dormir y Papá Noel no vendrá si sigue despierto.",
+        "en": "It's Christmas Eve and Peter and his sisters have wished for a special present, but Peter can't sleep, and Father Christmas won't come while he's awake."
+      },
+      "publisher": "Puffin",
+      "year": 2017,
+      "lang": "en",
+      "binding": "board",
+      "pages": 16,
+      "size": {
+        "h": 168,
+        "w": 196,
+        "t": 18.5,
+        "source": "photo"
+      },
+      "isbn": "9780241548110",
+      "verify": [
+        "author credit (a Peter Rabbit spin-off, not written by Potter)",
+        "edition year"
+      ],
+      "spine": "spines/peter-rabbit-a-christmas-wish.jpg",
+      "cover": "covers/peter-rabbit-a-christmas-wish.jpg",
+      "color": "#8d2d30"
+    },
+    {
+      "slug": "the-tale-of-peter-rabbit",
+      "shelf": "en",
+      "title": "The Tale of Peter Rabbit",
+      "authors": [
+        "Beatrix Potter"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Perico, el conejo travieso, se cuela en el huerto del señor McGregor y escapa por los pelos.",
+        "en": "Peter Rabbit sneaks into Mr McGregor's garden and only just escapes."
+      },
+      "firstPublished": 1902,
+      "publisher": "Frederick Warne",
+      "year": 2002,
+      "lang": "en",
+      "binding": "hardback",
+      "pages": 80,
+      "size": {
+        "h": 145,
+        "w": 109,
+        "t": 11.4,
+        "source": "amazon"
+      },
+      "isbn": "9780723247708",
+      "spine": "spines/the-tale-of-peter-rabbit.jpg",
+      "color": "#99a5a7",
+      "cover": "covers/the-tale-of-peter-rabbit.jpg"
+    },
+    {
+      "slug": "the-world-of-peter-rabbit",
+      "shelf": "en",
+      "title": "The World of Peter Rabbit",
+      "authors": [
+        "Beatrix Potter"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Los 23 cuentos originales de Beatrix Potter, cada uno en su librito, en una caja.",
+        "en": "All 23 of Beatrix Potter's original tales, each in its own little book, in a box."
+      },
+      "publisher": "Frederick Warne",
+      "year": 2002,
+      "lang": "en",
+      "binding": "box set",
+      "pages": 1072,
+      "size": {
+        "h": 137,
+        "w": 125,
+        "t": 260,
+        "source": "estimate"
+      },
+      "isbn": "9780723264552",
+      "boxSet": true,
+      "contents": {
+        "es": "Los 23 cuentos originales",
+        "en": "The 23 original tales"
+      },
+      "verify": [
+        "cover width (estimated)"
+      ],
+      "spine": "spines/the-world-of-peter-rabbit.jpg",
+      "color": "#d6d9de"
+    }
+  ]
+}

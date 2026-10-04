@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Isabel &amp; Linda's Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Tinos is metric-compatible with Times New Roman; it is only downloaded where Times New Roman is not installed. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ballet:opsz@16..72&family=Tinos:ital@1&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- The opening frame as a still, until the 3D scene is ready (see src/poster.ts and .poster in style.css). -->
+    <div class="poster" id="poster" aria-hidden="true">
+      <picture>
+        <source media="(max-aspect-ratio: 1/1)" srcset="/poster/tall-shadow.webp" />
+        <img class="poster-shadow" src="/poster/wide-shadow.webp" alt="" />
+      </picture>
+      <picture>
+        <source media="(max-aspect-ratio: 1/1)" srcset="/poster/tall-island.webp" />
+        <img class="poster-island" src="/poster/wide-island.webp" alt="" fetchpriority="high" />
+      </picture>
+    </div>
+    <canvas id="scene"></canvas>
+
+    <header class="hero" id="hero">
+      <h1 class="title" data-i18n-label="title">
+        <span class="title-names">Isabel<span class="amp">&amp;</span>Linda</span>
+        <span class="title-word" data-i18n="titleWord"></span>
+      </h1>
+      <p class="subtitle" data-i18n="subtitle"></p>
+      <p class="count" id="count"></p>
+    </header>
+
+    <button class="lang" id="lang" type="button" aria-label="Cambiar idioma / Change language"></button>
+    <button class="recentre" id="recentre" type="button" aria-label="Back to the shelf" hidden>↺</button>
+    <nav class="steps" id="steps">
+      <button class="step" id="prev" type="button" data-i18n-label="prevBook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" /></svg>
+      </button>
+      <button class="step" id="next" type="button" data-i18n-label="nextBook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" /></svg>
+      </button>
+    </nav>
+
+    <div class="label" id="label" hidden>
+      <span class="label-title"></span>
+      <span class="label-author"></span>
+    </div>
+
+    <div class="detail" id="detail" hidden>
+      <div class="detail-card" role="dialog" aria-modal="true">
+        <div class="detail-cover"></div>
+        <div class="detail-meta">
+          <p class="detail-lang"></p>
+          <h2 class="detail-title"></h2>
+          <p class="detail-author"></p>
+          <p class="detail-credits"></p>
+          <p class="detail-about"></p>
+          <dl class="detail-facts"></dl>
+          <p class="detail-note" data-i18n="placeholderNote"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail polaroids" id="polaroid" hidden>
+      <div class="polaroid-row" role="dialog" aria-modal="true"></div>
+    </div>
+
+    <main id="story" aria-hidden="true"></main>
+
+    <footer class="footer">
+      <p data-i18n="footer"></p>
+      <p class="footer-small"><a href="#" data-i18n="viewAll"></a> · <span data-i18n="disclosure"></span></p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+:root {
+  --bg: #f5f4f0;
+  --fg: #1d1d1f;
+  --muted: #6e6e73;
+  --card: #ffffff;
+  --scrim: rgba(245, 244, 240, 0.72);
+  --island-blue: #4d74b1; /* sampled from the lit front panel in the live render */
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101012;
+    --fg: #f5f5f7;
+    --muted: #98989d;
+    --card: #1c1c1e;
+    --scrim: rgba(16, 16, 18, 0.72);
+    --island-blue: #7d9ddb; /* lighter, so the script's hairlines hold up on near-black */
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101012;
+  --fg: #f5f5f7;
+  --muted: #98989d;
+  --card: #1c1c1e;
+  --scrim: rgba(16, 16, 18, 0.72);
+  --island-blue: #7d9ddb;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100lvh;
+  display: block;
+  /* No touch-action here. With pan-y, iOS Safari scrolls the page on any vertical move without waiting for the
+     touch handlers, so a flick up at the end of a slide on the shelf scrolled the page instead of keeping the book
+     out. Without it, Safari waits for Input's touchmove, and the page scrolls only when Input lets it. */
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Drawn once the scene is ready (see warmup.ts), fading in over the poster. */
+#scene { opacity: 0; transition: opacity 0.5s; }
+.ready #scene { opacity: 1; }
+
+/* The opening frame as a still (see src/poster.ts; its numbers are in poster.css). Sized and placed as Rig fits the
+   island's box on the first screen: --fill of the width or --fill-h of the height, whichever is smaller, with its
+   bottom edge --bottom above the screen's. Each layer sits at --x, --y from the box's bottom centre, --w wide. */
+.poster {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 100vh;
+  height: 100lvh;
+  overflow: hidden;
+  pointer-events: none;
+  --s: min(100vw * var(--fill) / var(--bw), 100lvh * var(--fill-h) / var(--bh)); /* px per px of the poster's screen */
+}
+.poster img {
+  position: absolute;
+  left: calc(50% + var(--x) * var(--s));
+  top: calc(100% * (1 - var(--bottom)) + var(--y) * var(--s));
+  width: calc(var(--w) * var(--s));
+  height: auto;
+}
+/* Under the fading canvas the island stays, so the scene never looks see-through; the doubled shadow fades. */
+.ready .poster { visibility: hidden; transition: visibility 0s 0.5s; }
+.ready .poster-shadow { opacity: 0; transition: opacity 0.5s; }
+@media (prefers-color-scheme: dark) {
+  .poster-shadow { display: none; } /* as the scene drops it, see main.ts */
+}
+#scene.grab { cursor: grab; }
+#scene.grabbing { cursor: grabbing; }
+#scene.pointer { cursor: pointer; }
+
+#story { height: 320vh; pointer-events: none; }
+
+.hero {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: clamp(56px, 12vh, 120px) 16px 0;
+  text-align: center;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+/* The logo: "Isabel & Linda" in italic serif with a script ampersand, over a tracked-caps word, all in the island's
+   blue. Sizes are in em of the names (64px in the design), so the lockup scales as one piece on narrow screens. */
+.hero .title {
+  margin: 0;
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.1875em;
+  color: var(--island-blue);
+  font-size: clamp(44px, 14vw, 64px);
+  font-weight: 400;
+}
+.title-names {
+  font-family: "Times New Roman", Tinos, Times, serif;
+  font-style: italic;
+  line-height: 0.906;
+  letter-spacing: -0.047em;
+  white-space: nowrap;
+}
+/* Ballet's tall ascent and descent would otherwise make the line taller than the names' 58px. */
+.title-names .amp { font-family: Ballet, cursive; font-style: normal; line-height: 0; }
+.title-word {
+  font: 400 0.25em/normal Inter, system-ui, sans-serif;
+  letter-spacing: 0.3125em;
+  margin-right: -0.3125em; /* the tracking after the last letter would push the word off centre */
+  text-transform: uppercase;
+}
+.hero .subtitle {
+  margin: 40px auto 0;
+  max-width: 29.3em;
+  text-wrap: pretty;
+  font-size: clamp(17px, 2.2vw, 22px);
+  color: var(--muted);
+  letter-spacing: -0.01em;
+}
+.hero .count {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.lang, .recentre {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  z-index: 10;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: 500 13px/1 Inter, system-ui, sans-serif;
+  color: var(--fg);
+  background: var(--scrim);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+.recentre { right: auto; left: 16px; font-size: 16px; padding: 7px 12px; }
+
+/* ‹ › at the sides of the shelf, level with the middle board. Shown only once the camera is at the shelf. */
+.steps { opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.steps.on { opacity: 1; }
+.step {
+  position: fixed;
+  top: 50%;
+  z-index: 6;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: var(--fg);
+  background: var(--scrim);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s;
+}
+.steps.on .step { pointer-events: auto; }
+.step:active { transform: scale(0.92); }
+.step svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#prev { left: max(12px, env(safe-area-inset-left)); }
+#next { right: max(12px, env(safe-area-inset-right)); }
+
+.label {
+  position: fixed;
+  left: 0; top: 0;
+  z-index: 5;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--scrim);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  text-align: center;
+  width: max-content; /* near the right edge it would otherwise shrink to the room left of it */
+  max-width: min(220px, 100vw - 16px);
+  transition: opacity 0.15s;
+}
+.label-title { display: block; font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
+.label-author { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* The open views. Their cards fly in from the scene (see flight.ts), so the scrim fades on its own layer, not
+   with them. */
+.detail {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  /* px per mm, the same for every cover so a big book looks big: the biggest one fills the room for the cover.
+     --max-w and --max-h (mm) are set from the data in main.ts. */
+  --k: min(min(420px, 100vw - 470px) / var(--max-w), min(560px, 100svh - 96px) / var(--max-h));
+}
+.detail[hidden] { display: none; }
+.detail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--scrim);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.detail.shown::before { opacity: calc(1 - var(--drag, 0)); }
+.polaroid-card, .detail-cover {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+.polaroid-row.still .polaroid-card, .detail-card.still .detail-cover { transition: none; }
+/* LAND in polaroidView.ts and bookView.ts matches this duration */
+.detail.closing .polaroid-card, .detail.closing .detail-cover { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+/* Swipe down to close: the card or the row of prints follows the finger and the scrim fades with it (--drag), then
+   either flies back to the scene or springs back up. The card is the cover's offset parent, so a flight that starts
+   mid-swipe starts where the cover is (flight.ts). */
+.detail-card { position: relative; }
+.detail-card, .polaroid-row { transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.detail.dragging :is(.detail-card, .polaroid-row), .detail-card.still, .polaroid-row.still,
+.detail.dragging::before { transition: none; }
+
+.detail-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 380px);
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+}
+.detail-cover {
+  width: calc(var(--w) * var(--k));
+  height: calc(var(--h) * var(--k));
+  border-radius: 4px 10px 10px 4px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+.detail-lang { margin: 0; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.detail-title { margin: 6px 0 0; font-size: 30px; letter-spacing: -0.03em; line-height: 1.1; }
+.detail-author { margin: 8px 0 0; font-size: 17px; color: var(--muted); }
+.detail-credits { margin: 4px 0 0; font-size: 14px; color: var(--muted); white-space: pre-line; }
+.detail-about { margin: 18px 0 0; font-size: 17px; line-height: 1.45; text-wrap: pretty; }
+.detail-facts { margin: 20px 0 0; font-size: 14px; line-height: 1.4; }
+.detail-facts div {
+  display: grid;
+  grid-template-columns: 8.5em 1fr;
+  gap: 12px;
+  padding: 7px 0;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+}
+.detail-facts dt { color: var(--muted); }
+.detail-facts dd { margin: 0; }
+.detail-meta [hidden] { display: none; }
+.detail-note { margin: 20px 0 0; font-size: 14px; color: var(--muted); }
+/* The details come in once the cover is on its way, and go before it lands. */
+.detail-meta { opacity: 0; transition: opacity 0.2s; }
+.detail.shown .detail-meta { opacity: 1; transition: opacity 0.4s 0.15s; }
+@media (prefers-reduced-motion: reduce) {
+  .detail::before, .polaroid-card, .detail-cover, .detail.closing .polaroid-card, .detail.closing .detail-cover,
+  .detail-meta, .detail.shown .detail-meta, .detail-card, .polaroid-row { transition: none; }
+}
+@media (max-width: 640px) {
+  /* The biggest cover takes 40% of the screen's height and the details scroll under it if they need to,
+     always leaving some scrim above and below to tap, which closes the view, like a swipe down. */
+  .detail { --k: min((100vw - 32px) / var(--max-w), 40svh / var(--max-h)); }
+  .detail-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-height: calc(100svh - 140px);
+    text-align: center;
+  }
+  .detail-cover { flex: none; }
+  .detail-meta { width: 100%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  .detail-about { font-size: 16px; }
+  .detail-facts div { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 6px; }
+}
+
+/* Polaroid 600 print: 88 × 107 mm, a 79 mm square photo, 4.5 mm borders and a 23.5 mm strip below. */
+.polaroids { padding: 0; }
+.polaroid-row {
+  --print: min(72vw, 320px, (100svh - 120px) * 88 / 107);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: 100%; /* a card on its way up from the worktop is not clipped */
+  padding: 48px calc(50% - var(--print) / 2);
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* Sideways only: an up or down swipe would scroll the page behind, which moves the camera (see Input). */
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+}
+.polaroid-row::-webkit-scrollbar { display: none; }
+/* Wide enough for three side by side: no swiping, which a mouse wheel cannot do. */
+@media (min-width: 760px) {
+  .polaroid-row {
+    --print: min(320px, (100vw - 112px) / 3, (100svh - 120px) * 88 / 107);
+    justify-content: center;
+    gap: 32px;
+    padding-inline: 16px;
+    overflow: visible;
+  }
+}
+.polaroid-card {
+  flex: none;
+  width: var(--print);
+  height: calc(var(--print) * 107 / 88);
+  margin: 0;
+  padding: calc(var(--print) * 4.5 / 88) calc(var(--print) * 4.5 / 88) 0;
+  background: #fbfaf7;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.22), 0 2px 6px rgba(0, 0, 0, 0.12);
+  scroll-snap-align: center;
+}
+.polaroid-photo { aspect-ratio: 1; background: #d9d6cf center / cover; }
+.polaroid-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.polaroid-caption {
+  margin: 0;
+  height: calc(var(--print) * 23.5 / 88);
+  display: grid;
+  place-content: center;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+}
+.polaroid-caption span { margin-top: 3px; color: #8a8780; font-size: 13px; }
+
+.footer {
+  position: relative;
+  z-index: 4;
+  padding: 18px 16px max(18px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  background: linear-gradient(to bottom, transparent, var(--bg) 40%);
+}
+.footer p { margin: 4px 0; }
+.footer a { color: var(--fg); text-decoration: none; font-weight: 500; }
+.footer-small { font-size: 11px; }
+
+.haptic { position: fixed; left: -100px; top: -100px; opacity: 0; pointer-events: none; }
