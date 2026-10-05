@@ -8,6 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "bake": "/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup -P blender/bake_export.py && gltf-transform meshopt public/island/island.glb public/island/island.glb",
+    "thumbs": "sh scripts/thumbs.sh",
     "bake:quick": "/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup -P blender/bake_export.py -- --quick && gltf-transform meshopt public/island/island.glb public/island/island.glb"
   },
   "dependencies": {

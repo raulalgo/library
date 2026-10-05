@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Tinos is metric-compatible with Times New Roman; it is only downloaded where Times New Roman is not installed. -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ballet:opsz@16..72&family=Tinos:ital@1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ballet:opsz@16..72&family=Tinos:ital@0;1&family=Caveat:wght@500&display=swap" rel="stylesheet" />
   </head>
   <body>
     <!-- The opening frame as a still, until the 3D scene is ready (see src/poster.ts and .poster in style.css). -->
@@ -30,7 +30,6 @@
         <span class="title-word" data-i18n="titleWord"></span>
       </h1>
       <p class="subtitle" data-i18n="subtitle"></p>
-      <p class="count" id="count"></p>
     </header>
 
     <button class="lang" id="lang" type="button" aria-label="Cambiar idioma / Change language"></button>
@@ -49,6 +48,14 @@
       <span class="label-author"></span>
     </div>
 
+    <!-- View all: the covers on a wall that pans both ways (see src/allView.ts). Under the open book view. -->
+    <div class="all" id="all" role="dialog" aria-modal="true" data-i18n-label="allBooks" hidden>
+      <ul class="all-wall"></ul>
+      <button class="all-close" id="all-close" type="button" data-i18n-label="close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" /></svg>
+      </button>
+    </div>
+
     <div class="detail" id="detail" hidden>
       <div class="detail-card" role="dialog" aria-modal="true">
         <div class="detail-cover"></div>
@@ -60,19 +67,20 @@
           <p class="detail-about"></p>
           <dl class="detail-facts"></dl>
           <p class="detail-note" data-i18n="placeholderNote"></p>
+          <p class="detail-affiliate" data-i18n="disclosure"></p>
         </div>
       </div>
     </div>
 
     <div class="detail polaroids" id="polaroid" hidden>
+      <p class="polaroid-heading" aria-hidden="true" hidden></p>
       <div class="polaroid-row" role="dialog" aria-modal="true"></div>
     </div>
 
     <main id="story" aria-hidden="true"></main>
 
-    <footer class="footer">
-      <p data-i18n="footer"></p>
-      <p class="footer-small"><a href="#" data-i18n="viewAll"></a> · <span data-i18n="disclosure"></span></p>
+    <footer class="footer" id="footer">
+      <a href="#" data-view-all data-i18n="viewAll"></a>
     </footer>
 
     <script type="module" src="/src/main.ts"></script>

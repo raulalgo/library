@@ -20,7 +20,7 @@ const flipY = new THREE.Matrix4().makeScale(1, -1, 1);
 function transform(
   el: HTMLElement,
   camera: THREE.PerspectiveCamera,
-  pose: (f: number, fromAxis: THREE.Vector2) => THREE.Matrix4,
+  pose: (f: number, fromAxis: THREE.Vector2, centre: THREE.Vector2) => THREE.Matrix4,
 ) {
   const P = camera.projectionMatrix.elements;
   const box = canvas.getBoundingClientRect();
@@ -36,7 +36,7 @@ function transform(
   const fromAxis = centre.clone().sub(axis);
   // Both ends of a flight use this same list of functions, so the browser interpolates them one by one:
   // the translate and perspective stay put and only the matrix (rotation, scale, position) moves.
-  return `translate(${-fromAxis.x}px, ${-fromAxis.y}px) perspective(${f}px) matrix3d(${pose(f, fromAxis).elements.join(',')})`;
+  return `translate(${-fromAxis.x}px, ${-fromAxis.y}px) perspective(${f}px) matrix3d(${pose(f, fromAxis, centre).elements.join(',')})`;
 }
 
 /**
@@ -64,5 +64,14 @@ export function onPage(el: HTMLElement, camera: THREE.PerspectiveCamera, tilt = 
     new THREE.Matrix4()
       .makeTranslation(fromAxis.x, fromAxis.y, 0)
       .multiply(new THREE.Matrix4().makeRotationZ(THREE.MathUtils.degToRad(tilt))),
+  );
+}
+
+/** The element moved and scaled onto `box`, a place on the page: a cover on the View all wall (see allView.ts). */
+export function onBox(el: HTMLElement, box: DOMRect, camera: THREE.PerspectiveCamera) {
+  return transform(el, camera, (_, fromAxis, centre) =>
+    new THREE.Matrix4()
+      .makeTranslation(fromAxis.x + box.x + box.width / 2 - centre.x, fromAxis.y + box.y + box.height / 2 - centre.y, 0)
+      .multiply(new THREE.Matrix4().makeScale(box.width / el.offsetWidth, box.height / el.offsetHeight, 1)),
   );
 }

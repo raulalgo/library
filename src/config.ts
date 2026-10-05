@@ -29,6 +29,7 @@ export const config = {
   coverTurnDeg: 76,
   lidOpenDeg: 18, // how far a pulled-out box set's lid tilts open
   flatTiltDeg: 88, // a flat book, turned head-up, tips its cover this far toward the viewer
+  coverMargin: 0.03, // share of screen width kept clear at each side of a stood-up flat book (it moves inward to keep it)
   thumbLift: 0.1, // extra lift on touch so the book shows above the thumb
   hoverLift: 0.05, // lift with the mouse, so a pulled-out book does not drop below the shelf
   neighbourSigma: 1.3, // width of the bulge around the selected book, in books
@@ -38,8 +39,9 @@ export const config = {
   dockSigma: 3, // books this close to the gap keep most of their thickness; those further away get thinner
   dockMinScale: 0.5, // the thinnest a spine gets
   dockMargin: 0.008, // metres of air on each side of the cover
-  flickVelocity: 0.6, // px/ms upward to pin a book (also how fast a swipe down closes an open view)
-  flickLiftPx: 24, // or this far up after a slide pins it
+  flickVelocity: 0.6, // px/ms upward that opens the book at the end of a slide (also how fast a swipe down closes an open view)
+  flickLiftPx: 24, // or this far up after a slide opens it
+  labelTop: 1 / 6, // where the selected book's title sits, as a share of screen height from the top (its centre)
 };
 
 export type Config = typeof config;
