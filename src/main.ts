@@ -138,8 +138,16 @@ function fillDetail(sb: ShelfBook) {
 // it any other way (the scrim, a swipe down, Esc) goes back past that entry too, and popstate does the closing.
 let leaving = 0; // a history.back() on its way, see closeDetail
 
+// Umami, loaded in index.html, counts the books opened. It is missing when a blocker stops the script.
+declare global {
+  interface Window {
+    umami?: { track(event: string, data?: Record<string, string>): void };
+  }
+}
+
 function showBook(sb: ShelfBook, fly = true) {
   fillDetail(sb);
+  window.umami?.track('Open book', { book: sb.book.title });
   // Over the View all wall, the cover flies off the wall and back onto it.
   const home = isAllOpen() ? onWall(sb) : onShelf(sb, rig.camera);
   if (openBook) swapBookView(home);
