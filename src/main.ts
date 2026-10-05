@@ -357,10 +357,13 @@ if (fromHash) {
   history.replaceState(null, ''); // a view that was open before a reload
 }
 
-// ---------- poster (?poster, dev only) ----------
+// ---------- poster and link preview (?poster, ?social, dev only) ----------
 
 if (import.meta.env.DEV && new URLSearchParams(location.search).has('poster')) {
   Promise.all([island, warm, import('./poster')]).then(([shadow, , { makePosters }]) => makePosters(renderer, scene, rig, shadow));
+}
+if (import.meta.env.DEV && new URLSearchParams(location.search).has('social')) {
+  Promise.all([island, warm, import('./poster')]).then(([shadow, , { makeSocial }]) => makeSocial(renderer, scene, rig, shadow));
 }
 
 // ---------- tuning (?tune) ----------
