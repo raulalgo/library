@@ -12,7 +12,8 @@ import { Polaroids } from './scene/polaroids';
 import { Input } from './input';
 import { tick } from './haptics';
 import { openPolaroids, closePolaroids, dragPolaroids, settlePolaroids } from './polaroidView';
-import { openBookView, swapBookView, closeBookView, dragBookView, settleBookView } from './bookView';
+import { openBookView, swapBookView, closeBookView, dragBookView, settleBookView, onShelf } from './bookView';
+import { initAll, openAll, closeAll, isAllOpen, isAllLanded, onWall, revealOnWall, glideWall, preloadWall } from './allView';
 import { loadBooks } from './data';
 import { apply as applyI18n, lang, setLang, t } from './i18n';
 
@@ -71,13 +72,12 @@ const langButton = document.querySelector<HTMLButtonElement>('#lang')!;
 const recentre = document.querySelector<HTMLButtonElement>('#recentre')!;
 const hero = document.querySelector<HTMLElement>('#hero')!;
 const poster = document.querySelector<HTMLElement>('#poster')!;
+const footer = document.querySelector<HTMLElement>('#footer')!;
 let openBook: ShelfBook | null = null;
 
 function renderText() {
   applyI18n();
   langButton.textContent = t().langButton;
-  const real = shelf.all().length;
-  document.querySelector('#count')!.textContent = t().count(real);
   if (openBook) fillDetail(openBook);
 }
 
@@ -86,7 +86,10 @@ function fillDetail(sb: ShelfBook) {
   const cover = detail.querySelector<HTMLElement>('.detail-cover')!;
   // A box set shows its front, the photo on its spine side, which is as wide as the box is thick.
   const image = b.boxSet ? b.spine : b.cover;
-  cover.style.background = image ? `${b.color} url(${import.meta.env.BASE_URL}${image}) center / cover` : b.color;
+  const url = (path: string) => `url(${import.meta.env.BASE_URL}${path}) center / cover`;
+  // the small copy, loaded for the View all wall, shows until the full cover is in
+  const layers = image ? [url(image), ...(image === b.cover ? [url(image.replace('covers/', 'covers/small/'))] : [])] : [];
+  cover.style.background = [...layers, b.color].join(', ');
   // At its real size: style.css turns mm into px at one scale for every book.
   cover.style.setProperty('--w', `${b.boxSet ? b.mm.t : b.mm.w}`);
   cover.style.setProperty('--h', `${b.mm.h}`);
@@ -137,8 +140,10 @@ let leaving = 0; // a history.back() on its way, see closeDetail
 
 function showBook(sb: ShelfBook, fly = true) {
   fillDetail(sb);
-  if (openBook) swapBookView(sb);
-  else openBookView(sb, rig.camera, fly);
+  // Over the View all wall, the cover flies off the wall and back onto it.
+  const home = isAllOpen() ? onWall(sb) : onShelf(sb, rig.camera);
+  if (openBook) swapBookView(home);
+  else openBookView(sb, rig.camera, fly, home);
   openBook = sb;
   // Stepping to another book in the open view replaces its entry: Back still closes the view.
   const state = { view: 'book', id: sb.book.id };
@@ -152,10 +157,26 @@ function showPolaroids(index: number) {
   history.pushState({ view: 'polaroid', index }, '');
 }
 
+function showAll() {
+  if (isAllOpen()) return;
+  shelf.clear();
+  openAll(rig.camera);
+  history.pushState({ view: 'all' }, '');
+}
+
 function closeViews() {
   closeBookView();
   closePolaroids();
+  closeAll();
   openBook = null;
+}
+
+/** The view on top: an open book over the View all wall closes on its own. */
+function closeTop() {
+  if (openBook && isAllOpen()) {
+    closeBookView();
+    openBook = null;
+  } else closeViews();
 }
 
 function closeDetail() {
@@ -165,7 +186,7 @@ function closeDetail() {
   leaving = window.setTimeout(() => {
     // popstate never came
     leaving = 0;
-    closeViews();
+    closeTop();
   }, 400);
 }
 
@@ -175,15 +196,19 @@ window.addEventListener('popstate', (e) => {
   // Forward onto a book opens it again; anything else closes what is open.
   const state = e.state as { view?: string; id?: string } | null;
   const sb = state?.view === 'book' ? shelf.all().find((b) => b.book.id === state.id) : undefined;
-  if (!sb) closeViews();
+  if (state?.view === 'all') {
+    // Back from a book opened on the wall, or forward onto the wall
+    if (openBook) closeTop();
+    else openAll(rig.camera);
+  } else if (!sb) closeViews();
   else if (sb !== openBook) {
-    shelf.focusOn(sb.row, sb.index, false);
+    if (!isAllOpen()) shelf.focusOn(sb.row, sb.index, false);
     showBook(sb);
   }
 });
 
-const isOpen = () => !detail.hidden || !polaroidView.hidden;
-const atShelf = () => rig.inShelf() && !rig.orbiting && !!detail.hidden && !!polaroidView.hidden;
+const isOpen = () => !detail.hidden || !polaroidView.hidden || isAllOpen();
+const atShelf = () => rig.inShelf() && !rig.orbiting && !isOpen();
 
 // Arrow keys and the ‹ › buttons step through the books in shelf order, across both rows.
 function stepBook(dir: 1 | -1, touch = false) {
@@ -203,9 +228,17 @@ window.addEventListener('keydown', (e) => {
   }
   if (dir && openBook) {
     const next = shelf.neighbour(openBook, dir);
-    shelf.focusOn(next.row, next.index, false);
-    rig.panTo(next.base.x); // so the cover lands on screen when the view closes
+    // so the cover lands on screen when the view closes
+    if (isAllOpen()) revealOnWall(next);
+    else {
+      shelf.focusOn(next.row, next.index, false);
+      rig.panTo(next.base.x);
+    }
     showBook(next);
+  } else if (isAllOpen() && !openBook && e.key.startsWith('Arrow')) {
+    e.preventDefault();
+    const d = 240;
+    glideWall(e.key === 'ArrowLeft' ? d : e.key === 'ArrowRight' ? -d : 0, e.key === 'ArrowUp' ? d : e.key === 'ArrowDown' ? -d : 0);
   } else if (dir && atShelf()) {
     e.preventDefault();
     stepBook(dir);
@@ -222,6 +255,14 @@ langButton.addEventListener('click', () => {
   renderText();
 });
 recentre.addEventListener('click', () => rig.returnHome());
+initAll(shelf.all(), (sb) => showBook(sb));
+for (const link of document.querySelectorAll<HTMLElement>('[data-view-all]')) {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    showAll();
+  });
+}
+document.querySelector('#all-close')!.addEventListener('click', closeDetail);
 
 const input = new Input(canvas, rig, shelf, polaroids, {
   openBook: showBook,
@@ -243,7 +284,9 @@ gsap.to(scroll, {
 
 // ---------- loop ----------
 
+let redraw = true; // a resize clears the canvas, so it is drawn even under the landed wall
 function resize() {
+  redraw = true;
   const w = canvas.clientWidth;
   const h = canvas.clientHeight;
   renderer.setSize(w, h, false);
@@ -260,7 +303,6 @@ const warm = warmUp(renderer, scene, rig.camera, island).then(() => {
   document.body.classList.add('ready');
 });
 
-const anchor = new THREE.Vector3();
 const clock = new THREE.Clock();
 function frame(dt: number) {
   rig.progress = scroll.p;
@@ -279,21 +321,21 @@ function frame(dt: number) {
   if (!rig.inShelf() && shelf.selected && !openBook) shelf.clear();
   // The ‹ › buttons step aside while a finger slides along the shelf: they would sit on the label.
   steps.classList.toggle('on', atShelf() && input.mode !== 'scrub');
+  footer.classList.toggle('on', atShelf());
 
   const sb = shelf.selected;
   if (sb && sb.pull > 0.3 && detail.hidden) {
-    shelf.labelAnchor(sb, anchor).project(rig.camera);
     label.hidden = false;
-    // Near a side of the screen the label stays inside it.
-    const half = label.offsetWidth / 2 + 8;
-    label.style.left = `${THREE.MathUtils.clamp((anchor.x * 0.5 + 0.5) * canvas.clientWidth, half, canvas.clientWidth - half)}px`;
-    // A top-row cover reaches the top of the screen; the label then stays just inside it, over the cover.
-    label.style.top = `${Math.max(label.offsetHeight + 12, (-anchor.y * 0.5 + 0.5) * canvas.clientHeight)}px`;
+    // The label holds still while the selection moves along the shelf, so it can be read during a slide.
+    label.style.top = `${config.labelTop * canvas.clientHeight}px`;
     label.querySelector('.label-title')!.textContent = sb.book.title || (lang() === 'es' ? 'Sin identificar' : 'Not identified yet');
     label.querySelector('.label-author')!.textContent = sb.book.author;
   } else label.hidden = true;
 
-  if (ready) renderer.render(scene, rig.camera);
+  if (rig.inShelf() && ready) preloadWall();
+  // Under the landed wall nothing in the scene moves; the blurred scrim over it is costly enough while panning.
+  if (ready && (redraw || !isAllLanded())) renderer.render(scene, rig.camera);
+  redraw = false;
 }
 renderer.setAnimationLoop(() => frame(Math.min(clock.getDelta(), 0.05)));
 
@@ -360,6 +402,7 @@ if (new URLSearchParams(location.search).has('tune')) {
     sh.add(config, 'dockMargin', 0, 0.03, 0.001);
     sh.add(config, 'flickVelocity', 0.1, 2, 0.05);
     sh.add(config, 'flickLiftPx', 8, 80, 1);
+    sh.add(config, 'labelTop', 0.05, 0.6, 0.01);
     gui.add({ copy: () => navigator.clipboard.writeText(JSON.stringify(config, null, 2)) }, 'copy').name('Copy values');
     gui.close();
   });

@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { config } from './config';
 import { tick } from './haptics';
-import { touchLog } from './touchlog';
 import type { Rig } from './camera';
 import type { Shelf, RowName, ShelfBook } from './scene/books';
 import type { Polaroids } from './scene/polaroids';
@@ -24,10 +23,12 @@ type Mode = 'idle' | 'pending' | 'scroll' | 'pan' | 'scrub' | 'orbit';
  * - vertical scroll: the page and the camera story (never captured)
  * - touch, sideways slide on a row, over books or empty shelf: magnifier. The row is laid across the screen in
  *   slots, one per book; the finger's slot picks the book, and the shelf moves against the finger to keep that book
- *   under it, so one slide reaches every book in the row (see layOut)
+ *   under it, so one slide reaches every book in the row (see layOut); a flick up at the end opens the book
  * - touch, press without sliding, however long: the spine under the finger comes out, like a tap
  * - touch, sideways swipe off the rows / trackpad swipe / Shift+wheel: pan the shelf
- * - mouse hover: magnifier, Dock-style (the pointer's place along the row picks the book; see Shelf.pick)
+ * - mouse hover: magnifier, Dock-style (the pointer's place along the row picks the book; see Shelf.pick). On a row
+ *   too long for the screen (a narrow window), the pointer works the touch slide's slots instead, and the shelf moves
+ *   against it the same way, so every book is in reach without panning (see hover)
  * - arrow keys and the ‹ › buttons: step through the books (main.ts)
  * - Space+drag (mouse) or two-finger drag (touch): free orbit
  */
@@ -49,8 +50,8 @@ export class Input {
   private mouseOrbit = false;
   private mouse = { x: 0, y: 0 };
   private hoverHeld: { x: number; y: number } | null = null;
+  private mouseRow: RowName | null = null; // the row the pointer slides along through the slots, see hover
   private ray = new THREE.Raycaster();
-  private dbg = { scroll: 0, moves: 0, uncancelable: 0, prevented: 0 }; // ?debug, see touchlog.ts
 
   constructor(
     private canvas: HTMLCanvasElement,
@@ -63,10 +64,7 @@ export class Input {
     canvas.addEventListener('touchstart', (e) => this.touchStart(e), opts);
     canvas.addEventListener('touchmove', (e) => this.touchMove(e), opts);
     canvas.addEventListener('touchend', (e) => this.touchEnd(e), opts);
-    canvas.addEventListener('touchcancel', () => {
-      touchLog(`touchcancel in ${this.mode}`);
-      this.reset();
-    }, opts);
+    canvas.addEventListener('touchcancel', () => this.reset(), opts);
 
     canvas.addEventListener('pointermove', (e) => e.pointerType === 'mouse' && this.mouseMove(e));
     canvas.addEventListener('pointerdown', (e) => e.pointerType === 'mouse' && this.mouseDown(e));
@@ -156,7 +154,7 @@ export class Input {
   // ---------- touch ----------
 
   private touchStart(e: TouchEvent) {
-    if (this.ui.isOpen()) return touchLog('start ignored: a view is open');
+    if (this.ui.isOpen()) return;
     if (e.touches.length >= 2) {
       e.preventDefault();
       if (this.mode === 'scrub') this.shelf.clear();
@@ -174,8 +172,6 @@ export class Input {
     this.mode = 'pending';
     this.rig.panVelocity = 0;
     this.pressRow = this.rig.inShelf() && !this.rig.orbiting ? (this.shelf.pick(this.rayAt(t.clientX, t.clientY))?.row ?? null) : null;
-    this.dbg = { scroll: scrollY, moves: 0, uncancelable: 0, prevented: 0 };
-    touchLog(`── start row=${this.pressRow} inShelf=${this.rig.inShelf()} orbit=${this.rig.orbiting} y=${Math.round(t.clientY)}`);
   }
 
   private twoFingerState(touches: TouchList) {
@@ -212,7 +208,6 @@ export class Input {
     // not scroll sideways, so nothing else is lost. (The canvas has no touch-action for the same reason, see style.css.)
     if (this.mode === 'pending' && this.pressRow && Math.abs(mx) > Math.abs(my)) e.preventDefault();
 
-    const wasPending = this.mode === 'pending';
     if (this.mode === 'pending' && this.travel > config.slopPx) {
       const sideways = Math.abs(mx) > Math.abs(my);
       // Sideways on a row starts the magnifier; sideways anywhere else on the shelf pans it.
@@ -234,24 +229,19 @@ export class Input {
       }
     }
     this.last = { x: t.clientX, y: t.clientY };
-    this.dbg.moves++;
-    if (!e.cancelable) this.dbg.uncancelable++;
-    if (e.defaultPrevented) this.dbg.prevented++;
-    if (this.dbg.moves <= 2) touchLog(`move${this.dbg.moves} dx=${Math.round(mx)} dy=${Math.round(my)} cancelable=${e.cancelable} prevented=${e.defaultPrevented}`);
-    if (wasPending && this.mode !== 'pending') touchLog(`→ ${this.mode} after ${this.dbg.moves} moves`);
   }
 
   private touchEnd(e: TouchEvent) {
     if (e.touches.length > 0) return;
     const v = this.velocity();
     if (this.mode === 'scrub') {
-      // Up far enough, or flicked up: the book stays out. Otherwise it slides back.
+      // Up far enough, or flicked up: the book opens, its cover flying up off the shelf. Otherwise it slides back.
       const up = this.lift ? this.lift.y - this.last.y : 0;
-      const pin = !!this.lift && (up > config.flickLiftPx || -v.y > config.flickVelocity);
-      touchLog(`end scrub lift=${!!this.lift} up=${Math.round(up)}px vy=${(-v.y).toFixed(2)} → ${pin ? 'PINNED' : 'slides back'}`);
-      if (pin) {
-        this.shelf.pinned = true;
+      const open = !!this.lift && !!this.shelf.selected && (up > config.flickLiftPx || -v.y > config.flickVelocity);
+      if (open) {
+        this.shelf.pinned = true; // still out when the view closes, for the cover to land back on
         tick();
+        this.ui.openBook(this.shelf.selected!);
       } else this.shelf.clear();
     } else if (this.mode === 'pan') {
       this.rig.panVelocity = -(v.x * 1000) / this.pxPerMetre();
@@ -259,8 +249,6 @@ export class Input {
       e.preventDefault();
       this.tap(this.start.x, this.start.y);
     }
-    if (this.mode !== 'scrub') touchLog(`end ${this.mode}`);
-    touchLog(`moves=${this.dbg.moves} uncancelable=${this.dbg.uncancelable} prevented=${this.dbg.prevented} page scrolled ${Math.round(scrollY - this.dbg.scroll)}px`);
     this.reset();
   }
 
@@ -286,6 +274,12 @@ export class Input {
     this.scrubRow = row;
     this.rig.panHeld = true;
     this.layOut();
+  }
+
+  /** Whether the row is too long to fit between the margins, so the shelf has to move to reach all of it. */
+  private overflows(row: RowName) {
+    this.scrubRow = row;
+    return this.layOut();
   }
 
   /**
@@ -327,6 +321,7 @@ export class Input {
     const c = [first];
     gaps.forEach((g, i) => c.push(c[i] + Math.min(g, share)));
     this.slots = { c, x };
+    return total > span;
   }
 
   /** The book a finger x picks, as a fractional index: how far it is from one slot centre to the next. */
@@ -359,28 +354,29 @@ export class Input {
   /**
    * Once the finger turns upward during a slide, the book it was on stays picked and the shelf stops. A thumb drifts
    * sideways as it flicks up, and on a row whose slots are a few px wide that drift would pick another book, or keep
-   * the shelf moving under the book being flicked. Coming back down to where it turned resumes the slide.
+   * the shelf moving under the book being flicked. Coming back down to where it turned, or going sideways more than
+   * up, resumes the slide: a thumb arcs upward as it slides across the screen, and that arc is not a flick.
    */
   private watchLift(x: number, y: number) {
     if (this.lift) {
-      if (y >= this.lift.y - 2) this.lift = null;
+      const up = this.lift.y - y;
+      if (y >= this.lift.y - 2 || Math.abs(x - this.lift.x) > Math.max(config.slopPx, up)) this.lift = null;
       return;
     }
     // the lowest point on screen in the last moment: where the finger turned upward
     const now = this.samples[this.samples.length - 1].t;
     const low = this.samples.filter((p) => p.t >= now - 150).reduce((a, b) => (b.y > a.y ? b : a));
     const up = low.y - y;
-    if (up > config.slopPx && up > 1.5 * Math.abs(x - low.x)) {
+    if (up > config.slopPx && up > 2 * Math.abs(x - low.x)) {
       this.lift = { x: low.x, y: low.y };
-      touchLog(`lift: finger turned up at y=${Math.round(low.y)}`);
       this.fingerX = low.x;
       this.scrubTo(this.slotAt(low.x));
     }
   }
 
-  private scrubTo(f: number) {
+  private scrubTo(f: number, touch = true) {
     this.scrubF = f;
-    if (this.shelf.focusOn(this.scrubRow, f, true)) tick();
+    if (this.shelf.focusOn(this.scrubRow, f, touch) && touch) tick();
   }
 
   private tap(x: number, y: number) {
@@ -398,9 +394,10 @@ export class Input {
     tick();
   }
 
-  /** Called every frame while scrubbing: the shelf moves to keep the picked book under the finger. */
+  /** Called every frame while scrubbing: the shelf moves to keep the picked book under the finger (or pointer). */
   frame(dt: number) {
-    if (this.mode !== 'scrub') return;
+    if (this.mouseRow && (this.ui.isOpen() || !this.rig.inShelf() || this.rig.orbiting)) this.endMouseSlide();
+    if (this.mode !== 'scrub' && !this.mouseRow) return;
     const { c } = this.slots;
     const scale = this.onScreen(1) - this.onScreen(0);
     // In a margin the first or last book stays where its slot is, rather than being dragged along under the finger.
@@ -435,6 +432,13 @@ export class Input {
   /** After an arrow key, the stepped-to book stays out until the mouse really moves. */
   holdHover() {
     this.hoverHeld = { ...this.mouse };
+    this.endMouseSlide(); // the arrow key pans the shelf to the book instead
+  }
+
+  private endMouseSlide() {
+    if (!this.mouseRow) return;
+    this.mouseRow = null;
+    this.rig.panHeld = false; // the shelf eases back inside the pan limit
   }
 
   private hover(ray: THREE.Ray | null) {
@@ -446,11 +450,21 @@ export class Input {
     else if (ray && !polaroid) {
       // Off the rows (the shelf boards, the sides, the ‹ › buttons) the last book stays out.
       const hit = this.shelf.pick(ray);
-      if (hit) {
+      if (hit && this.overflows(hit.row)) {
+        // A row too long for the screen is worked like the touch slide: the pointer's slot picks the book and the
+        // shelf moves against the pointer to bring that book under it (frame).
+        this.mouseRow = hit.row;
+        this.rig.panHeld = true;
+        this.rig.panVelocity = 0;
+        this.fingerX = this.mouse.x;
+        this.scrubTo(this.slotAt(this.mouse.x), false);
+        cursor = 'pointer';
+      } else if (hit) {
+        this.endMouseSlide();
         this.shelf.focusOn(hit.row, hit.f, false);
         cursor = 'pointer';
-      }
-    }
+      } else this.endMouseSlide();
+    } else this.endMouseSlide();
     this.canvas.className = cursor;
   }
 

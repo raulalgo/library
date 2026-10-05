@@ -117,11 +117,16 @@ body {
 /* Ballet's tall ascent and descent would otherwise make the line taller than the names' 58px. */
 .title-names .amp { font-family: Ballet, cursive; font-style: normal; line-height: 0; }
 .title-word {
-  font: 400 0.25em/normal Inter, system-ui, sans-serif;
+  font: 400 0.25em/1.21 "Times New Roman", Tinos, Times, serif; /* 1.21 is Inter's normal line height, kept so the gap is unchanged */
   letter-spacing: 0.3125em;
   margin-right: -0.3125em; /* the tracking after the last letter would push the word off centre */
   text-transform: uppercase;
 }
+/* The Isabel & Linda pile open (polaroidView.ts): the names stay sharp over the scrim as the prints' caption, and
+   the rest of the hero fades out while the scrim is up. */
+.hero.names-up { z-index: 21; }
+.hero > :not(.title), .title-word { transition: opacity 0.4s; }
+.hero.names-alone > :not(.title), .hero.names-alone .title-word { opacity: 0; }
 .hero .subtitle {
   margin: 40px auto 0;
   max-width: 29.3em;
@@ -130,13 +135,8 @@ body {
   color: var(--muted);
   letter-spacing: -0.01em;
 }
-.hero .count {
-  margin: 10px 0 0;
-  font-size: 14px;
-  color: var(--muted);
-}
 
-.lang, .recentre {
+.lang, .recentre, .footer a {
   position: fixed;
   top: max(16px, env(safe-area-inset-top));
   right: 16px;
@@ -184,9 +184,9 @@ body {
 
 .label {
   position: fixed;
-  left: 0; top: 0;
+  left: 50%; top: 0;
   z-index: 5;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%);
   pointer-events: none;
   padding: 8px 12px;
   border-radius: 12px;
@@ -194,8 +194,8 @@ body {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   text-align: center;
-  width: max-content; /* near the right edge it would otherwise shrink to the room left of it */
-  max-width: min(220px, 100vw - 16px);
+  width: max-content;
+  max-width: min(280px, 100vw - 32px);
   transition: opacity 0.15s;
 }
 .label-title { display: block; font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
@@ -215,7 +215,7 @@ body {
   --k: min(min(420px, 100vw - 470px) / var(--max-w), min(560px, 100svh - 96px) / var(--max-h));
 }
 .detail[hidden] { display: none; }
-.detail::before {
+.detail::before, .all::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -227,6 +227,7 @@ body {
   transition: opacity 0.4s;
 }
 .detail.shown::before { opacity: calc(1 - var(--drag, 0)); }
+.all.shown::before { opacity: 1; }
 .polaroid-card, .detail-cover {
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
@@ -281,6 +282,8 @@ body {
 .detail-facts dd { margin: 0; }
 .detail-meta [hidden] { display: none; }
 .detail-note { margin: 20px 0 0; font-size: 14px; color: var(--muted); }
+/* The affiliate note goes with the book, where the shop links will be. */
+.detail-affiliate { margin: 20px 0 0; font-size: 12px; color: var(--muted); }
 /* The details come in once the cover is on its way, and go before it lands. */
 .detail-meta { opacity: 0; transition: opacity 0.2s; }
 .detail.shown .detail-meta { opacity: 1; transition: opacity 0.4s 0.15s; }
@@ -306,8 +309,109 @@ body {
   .detail-facts div { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 6px; }
 }
 
+/* View all: a wall of covers that pans both ways, over the same scrim as the open views and under the open book
+   (see allView.ts). Each cover flies off the shelf and back like the open book's (flight.ts); the wall itself moves
+   with a plain translate. No touch-action: allView pans it, and the page behind never scrolls. */
+.all {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  overflow: clip;
+  touch-action: none;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  cursor: grab;
+}
+.all[hidden] { display: none; }
+.all.panning { cursor: grabbing; }
+.all.panning .all-book { cursor: grabbing; }
+.all-wall { position: absolute; left: 0; top: 0; margin: 0; padding: 0; list-style: none; will-change: transform; }
+.all-wall li { position: absolute; }
+.all-book {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 8px;
+  border-radius: 2px 5px 5px 2px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.12);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  /* FLY in allView.ts. Slower than the open book's, and in-out, so the lift off the shelf can be seen. */
+  transition: transform 0.9s cubic-bezier(0.5, 0, 0.2, 1);
+}
+.all.flying .all-book { will-change: transform; }
+.all.still .all-book { transition: none; }
+.all.closing .all-book { transition: transform 0.7s cubic-bezier(0.5, 0, 0.2, 1); } /* LAND */
+.all-book.lent { visibility: hidden; } /* its cover is up in the open book view */
+.all-book img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.all-book img.loaded { opacity: 1; }
+.all-book:focus-visible { outline: 2px solid var(--island-blue); outline-offset: 4px; }
+.all-wall li { transition: translate 0.2s; }
+@media (hover: hover) {
+  .all:not(.panning) .all-wall li:hover { translate: 0 -4px; }
+}
+.all-close {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: var(--fg);
+  background: var(--scrim);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+.all-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+@media (prefers-reduced-motion: reduce) {
+  .all::before, .all-book, .all.closing .all-book { transition: none; }
+}
+
 /* Polaroid 600 print: 88 × 107 mm, a 79 mm square photo, 4.5 mm borders and a 23.5 mm strip below. */
 .polaroids { padding: 0; }
+/* A pile's title over its prints, where the names stand for the Isabel & Linda pile: set like "Library" under the
+   names (.title-word), at the top of the title lockup (.hero). It comes and goes with the scrim. */
+.polaroid-heading {
+  position: absolute;
+  top: clamp(56px, 12vh, 120px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: var(--island-blue);
+  font: 400 calc(clamp(44px, 14vw, 64px) * 0.25)/1.21 "Times New Roman", Tinos, Times, serif;
+  letter-spacing: 0.3125em;
+  text-indent: 0.3125em; /* the tracking after the last letter would push the word off centre */
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.polaroid-heading[hidden] { display: none; }
+.detail.shown .polaroid-heading { opacity: calc(1 - var(--drag, 0)); }
+.detail.dragging .polaroid-heading { transition: none; }
 .polaroid-row {
   --print: min(72vw, 320px, (100svh - 120px) * 88 / 107);
   position: relative;
@@ -356,19 +460,23 @@ body {
   font-size: 16px;
   text-align: center;
 }
-.polaroid-caption span { margin-top: 3px; color: #8a8780; font-size: 13px; }
+/* The date, handwritten on the strip */
+.polaroid-caption time { font: 500 calc(var(--print) * 0.08)/1 Caveat, cursive; }
 
-.footer {
-  position: relative;
-  z-index: 4;
-  padding: 18px 16px max(18px, env(safe-area-inset-bottom));
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  background: linear-gradient(to bottom, transparent, var(--bg) 40%);
+/* View all, a button like the language one at the bottom of the screen. It is out of the page, so the scroll ends at
+   the shelf, and shows only at the shelf, like the ‹ ›. */
+.footer a {
+  top: auto;
+  right: auto;
+  left: 50%;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 6;
+  transform: translateX(-50%);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
 }
-.footer p { margin: 4px 0; }
-.footer a { color: var(--fg); text-decoration: none; font-weight: 500; }
-.footer-small { font-size: 11px; }
+.footer.on a { opacity: 1; pointer-events: auto; }
 
 .haptic { position: fixed; left: -100px; top: -100px; opacity: 0; pointer-events: none; }

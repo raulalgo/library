@@ -9,20 +9,29 @@ import { lang, t } from './i18n';
 const TILT = [-2, 1.5, -1]; // degrees, once in the row
 const STAGGER = 50; // ms between prints leaving the pile, or landing on it
 const LAND = 500; // ms, the closing transition in style.css (.detail.closing .polaroid-card)
+// The Isabel & Linda pile. Its title is the page title's names, which stay sharp over the scrim (.names-up in
+// style.css). The other piles show theirs in the view's heading. The prints carry only their dates.
+const NAMED = 1;
 
 const view = document.querySelector<HTMLElement>('#polaroid')!;
 const row = view.querySelector<HTMLElement>('.polaroid-row')!;
+const heading = view.querySelector<HTMLElement>('.polaroid-heading')!;
+const hero = document.querySelector<HTMLElement>('#hero')!;
 let current: { pile: Polaroid; camera: THREE.PerspectiveCamera; cards: HTMLElement[] } | null = null;
 let landing = 0;
 
-function caption(spot: number, date?: string) {
+function month(date: string) {
+  const [y, m] = date.split('-').map(Number);
+  return new Intl.DateTimeFormat(lang(), { month: 'long', year: 'numeric' }).format(new Date(y, m - 1));
+}
+
+function caption(date?: string) {
   const p = document.createElement('p');
   p.className = 'polaroid-caption';
-  p.textContent = t().polaroid[spot];
   if (date) {
-    const [y, m] = date.split('-').map(Number);
-    const when = document.createElement('span');
-    when.textContent = new Intl.DateTimeFormat(lang(), { month: 'long', year: 'numeric' }).format(new Date(y, m - 1));
+    const when = document.createElement('time');
+    when.dateTime = date;
+    when.textContent = month(date);
     p.append(when);
   }
   return p;
@@ -35,13 +44,13 @@ function card(spot: number, i: number) {
   el.style.zIndex = String(SPOTS[spot].length - i);
   const photo = document.createElement('div');
   photo.className = 'polaroid-photo';
-  const text = caption(spot, print.date);
+  const text = caption(print.date);
   if (print.photo) {
     // the small copy is already loaded for the print on the worktop, so it shows while the large one loads
     photo.style.backgroundImage = `url(${photoUrl(print.photo, true)})`;
     const img = new Image();
     img.src = photoUrl(print.photo);
-    img.alt = text.textContent!;
+    img.alt = [t().polaroid[spot], print.date && month(print.date)].filter(Boolean).join(', ');
     img.decoding = 'async';
     photo.append(img);
   }
@@ -60,12 +69,16 @@ function putBack() {
   clearTimeout(landing);
   if (current) current.pile.held = false;
   current = null;
+  hero.classList.remove('names-up', 'names-alone');
 }
 
 export function openPolaroids(pile: Polaroid, camera: THREE.PerspectiveCamera) {
   putBack();
   const cards = SPOTS[pile.index].map((_, i) => card(pile.index, i));
   row.replaceChildren(...cards);
+  row.setAttribute('aria-label', t().polaroid[pile.index]);
+  heading.textContent = t().polaroid[pile.index];
+  heading.hidden = pile.index === NAMED;
   view.classList.remove('closing', 'shown', 'dragging');
   view.style.removeProperty('--drag');
   view.hidden = false;
@@ -81,6 +94,8 @@ export function openPolaroids(pile: Polaroid, camera: THREE.PerspectiveCamera) {
     c.style.transitionDelay = `${i * STAGGER}ms`;
     c.style.transform = onPage(c, camera, TILT[i]);
   });
+  hero.classList.toggle('names-up', pile.index === NAMED);
+  hero.classList.toggle('names-alone', pile.index === NAMED);
   pile.held = true;
   current = { pile, camera, cards };
 }
@@ -107,6 +122,8 @@ export function closePolaroids() {
   const { pile, camera, cards } = current;
   view.classList.add('closing');
   view.classList.remove('shown', 'dragging');
+  // the rest of the hero comes back as the scrim goes; the names stay over it until the prints have landed
+  hero.classList.remove('names-alone');
   // the bottom print lands first, the top one last
   cards.forEach((c, i) => {
     c.style.transitionDelay = `${(cards.length - 1 - i) * STAGGER}ms`;

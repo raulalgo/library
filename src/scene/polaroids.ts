@@ -13,8 +13,11 @@ const THICK = 0.0015;
 // {photo}.jpg (1000 px) for the open view. Dates are year-month.
 export type Print = { photo?: string; date?: string };
 export const SPOTS: Print[][] = [
-  [{}], // the island at home: photo to come
-  [{}], // the shelf: photo to come
+  [
+    { photo: 'island-1', date: '2024-11' },
+    { photo: 'island-2', date: '2026-04' },
+    { photo: 'island-3', date: '2024-10' },
+  ],
   [
     { photo: 'isabel-linda-1', date: '2023-10' },
     { photo: 'isabel-linda-2', date: '2023-10' },
@@ -50,7 +53,7 @@ function neutral<M extends THREE.MeshStandardMaterial>(m: M) {
 const frameGeo = new THREE.BoxGeometry(W, THICK, H);
 const photoGeo = new THREE.PlaneGeometry(PHOTO, PHOTO);
 const frameMat = neutral(new THREE.MeshStandardMaterial({ color: '#fbfaf7', roughness: 0.5 }));
-const blanks = ['#9a8f80', '#7f8a93', '#a08b86'];
+const blanks = ['#9a8f80', '#a08b86'];
 
 // Hover and taps hit an invisible box that stays where the print rests. Hitting the print itself made it
 // flicker: lifted and tilted, it could move out from under the pointer, drop, and lift again. The box is
@@ -78,9 +81,8 @@ export class Polaroids {
 
   constructor() {
     const spots: [number, number, number][] = [
-      [-0.78, 0.12, 0.12],
-      [-0.48, 0.2, -0.08],
-      [-0.16, 0.1, 0.07],
+      [-0.7, 0.14, 0.12],
+      [-0.3, 0.1, 0.07],
     ];
     spots.forEach(([x, z, rot], index) => {
       const g = new THREE.Group();

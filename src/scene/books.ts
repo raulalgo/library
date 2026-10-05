@@ -146,7 +146,8 @@ function photo(path: string) {
   return tex;
 }
 
-// Covers load when a book is first pulled out (they add up to ~9 MB); until then the cover is drawn.
+// Covers load when a book is first pulled out (they add up to ~9 MB); until then the cover is drawn. A flat
+// book's cover faces up, so it loads with the mesh.
 const coverMats = new Map<Book, THREE.MeshStandardMaterial>();
 
 function loadCover(book: Book) {
@@ -201,7 +202,8 @@ function makeMesh(book: Book) {
   coverMats.set(book, cover);
   const board = shelfLook(new THREE.MeshStandardMaterial({ color: book.color, roughness: 0.6 }));
   if (book.flat) {
-    // lying flat: length along x, thickness along y, cover facing up
+    // lying flat: length along x, thickness along y, cover facing up, so its photo is in view from the start
+    loadCover(book);
     const g = new THREE.BoxGeometry(book.h, book.t, book.w);
     return new THREE.Mesh(g, [pagesMat, pagesMat, cover, board, spine, pagesMat]);
   }
@@ -476,6 +478,32 @@ export class Shelf {
     return { xs, squash, lens };
   }
 
+  /**
+   * A flat book stands up as wide as its cover, centred where its longer body lay, so on a phone its cover can
+   * hang off the side of the screen. Returns how far it moves sideways (m), once stood up, to be all on screen.
+   */
+  private onScreen(b: ShelfBook, camera: THREE.Camera) {
+    const { h, t, w } = b.book;
+    const out = this.touch ? config.pullOutTouch : config.pullOut;
+    const lift = this.touch ? config.thumbLift : config.hoverLift;
+    const at = new THREE.Vector3(b.base.x, b.base.y + lift + 0.06, b.base.z + out * 0.8);
+    const turn = new THREE.Quaternion().setFromEuler(new THREE.Euler(THREE.MathUtils.degToRad(config.flatTiltDeg), -Math.PI / 2, 0));
+    const pose = new THREE.Matrix4().compose(at, turn, new THREE.Vector3(1, 1, 1));
+    let a = Infinity;
+    let c = -Infinity;
+    for (let i = 0; i < 8; i++) {
+      const p = new THREE.Vector3(i & 1 ? h / 2 : -h / 2, i & 2 ? t / 2 : -t / 2, i & 4 ? w / 2 : -w / 2);
+      p.applyMatrix4(pose).project(camera);
+      a = Math.min(a, p.x);
+      c = Math.max(c, p.x);
+    }
+    // screen width per metre at the book's distance (NDC spans 2)
+    const perMetre = at.clone().setX(at.x + 1).project(camera).x - at.clone().project(camera).x;
+    const edge = 1 - 2 * config.coverMargin;
+    const move = c - a > 2 * edge ? -(a + c) / 2 : Math.max(0, -edge - a) - Math.max(0, c - edge);
+    return move / perMetre;
+  }
+
   update(dt: number, camera: THREE.Camera) {
     look.exposure.value = config.bookExposure;
     look.shade.value = config.shelfShade;
@@ -501,14 +529,16 @@ export class Shelf {
         b.turn += (turn - b.turn) * k;
         b.lift += (lift - b.lift) * k;
         const lens = spread && b === this.selected ? spread.lens * b.pull : 0;
-        b.x += ((spread?.xs[b.index] ?? b.base.x) + lens - b.x) * k;
+        const shift = b.book.flat && b === this.selected ? this.onScreen(b, camera) : 0;
+        b.x += ((spread?.xs[b.index] ?? b.base.x) + lens + shift - b.x) * k;
         b.squash += ((spread?.squash[b.index] ?? 1) - b.squash) * k;
         const turnAmt = b.turn * smooth(0.35, 0.85, b.pull);
         const out = this.touch ? config.pullOutTouch : config.pullOut;
         const m = b.mesh;
         m.visible = !b.held;
         if (b.book.flat) {
-          m.position.set(b.base.x, b.base.y + b.lift + b.pull * 0.06, b.base.z + b.pull * out * 0.8);
+          // it moves sideways (onScreen) only as it stands up, so it does not sweep through its neighbours lying flat
+          m.position.set(b.base.x + (b.x - b.base.x) * turnAmt, b.base.y + b.lift + b.pull * 0.06, b.base.z + b.pull * out * 0.8);
           // a quarter turn about the cover's normal puts the head (lying left) away from the viewer, then the
           // tilt toward the viewer stands the cover upright
           m.rotation.set(turnAmt * THREE.MathUtils.degToRad(config.flatTiltDeg), -turnAmt * (Math.PI / 2), 0);
@@ -521,11 +551,5 @@ export class Shelf {
         }
       }
     }
-  }
-
-  /** World point just above the selected book, for the label. */
-  labelAnchor(sb: ShelfBook, out = new THREE.Vector3()) {
-    const h = sb.book.flat ? (sb.book.h / 2) * Math.sin(THREE.MathUtils.degToRad(config.flatTiltDeg)) : sb.book.h / 2;
-    return out.copy(sb.mesh.position).add(new THREE.Vector3(0, h + 0.02, 0));
   }
 }
