@@ -2,6 +2,44 @@
   "_about": "All books in the Libib collection, in scan order, which is shelf order: Spanish shelf (top) left to right, then English shelf (bottom). From the Libib scan (references/library_*.csv), with sizes in mm (h = spine length, w = cover width, t = thickness): h from Amazon listings, w from the cover image's proportions, h replaced by the photo measurement where they disagree (source \"photo\"), t always measured from the spine photo. spine = the straightened spine image in public/, color = its average colour, cover = front cover image in public/ (Amazon or Open Library, or flattened from a product shot) and names, original titles and first-publication years checked by hand. \"verify\" lists what still needs checking. about = one-sentence summary in ES and EN, written by Claude from publisher blurbs, to be reviewed by Raúl.",
   "books": [
     {
+      "slug": "los-medios-de-transporte",
+      "shelf": "es",
+      "title": "Los medios de transporte",
+      "series": "Mis primeras enciclopedias temáticas",
+      "authors": [
+        "Pascale Hédelin"
+      ],
+      "illustrators": [
+        "Robert Barborini"
+      ],
+      "translators": [
+        "Teresa Tellechea"
+      ],
+      "about": {
+        "es": "Un libro con solapas, ruedas, lengüetas y un pop-up para descubrir cómo funcionan los medios de transporte, del motor de un coche a un barco volador.",
+        "en": "A book of flaps, wheels, pull-tabs and a pop-up that shows how means of transport work, from a car engine to a flying boat."
+      },
+      "publisher": "SM",
+      "year": 2011,
+      "lang": "es",
+      "binding": "hardback",
+      "pages": 42,
+      "size": {
+        "h": 260,
+        "w": 270,
+        "t": 40.0,
+        "source": "photo"
+      },
+      "isbn": "9788467547139",
+      "verify": [
+        "original French title and year (Hédelin and Barborini's books are first published by Milan)",
+        "thickness: the spine photo gives 40 mm, Amazon says 27 mm"
+      ],
+      "spine": "spines/los-medios-de-transporte.jpg",
+      "color": "#d2c3b4",
+      "cover": "covers/los-medios-de-transporte.jpg"
+    },
+    {
       "slug": "teo-y-sus-abuelos",
       "shelf": "es",
       "title": "Teo y sus abuelos",
@@ -557,6 +595,48 @@
       "spine": "spines/buenas-noches-luna.jpg",
       "color": "#c6602c",
       "cover": "covers/buenas-noches-luna.jpg"
+    },
+    {
+      "slug": "bluey-y-sus-amigos-pequena-biblioteca",
+      "shelf": "es",
+      "title": "Bluey y sus amigos. Pequeña biblioteca",
+      "series": "Bluey",
+      "authors": [
+        "Gary Panton"
+      ],
+      "illustrators": [],
+      "about": {
+        "es": "Cuatro libritos de cartón con historias nuevas de los amigos de Bluey, en un estuche; juntas, sus contracubiertas forman un puzle.",
+        "en": "Four little board books with new stories about Bluey's friends, in a slipcase; put together, their back covers make a puzzle."
+      },
+      "original": {
+        "title": "Bluey and Friends: Little Library",
+        "lang": "en",
+        "year": 2023
+      },
+      "publisher": "Beascoa",
+      "year": 2025,
+      "lang": "es",
+      "binding": "box set",
+      "pages": 48,
+      "size": {
+        "h": 97,
+        "w": 93,
+        "t": 50,
+        "source": "casadellibro"
+      },
+      "isbn": "9788448870355",
+      "contents": {
+        "es": "Lucky y Mackenzie, Snickers y Coco, Honey y Chloe, Indy y Rusty",
+        "en": "Lucky y Mackenzie, Snickers y Coco, Honey y Chloe, Indy y Rusty"
+      },
+      "verify": [
+        "author credit (the copyright page is cut off at \"… por Gary Panton\")",
+        "shelf position (not in the Libib scan; placed after Buenas noches, Luna)"
+      ],
+      "spine": "spines/bluey-y-sus-amigos-pequena-biblioteca.jpg",
+      "color": "#78b9ab",
+      "cover": "covers/bluey-y-sus-amigos-pequena-biblioteca.jpg"
     },
     {
       "slug": "juan-rex",

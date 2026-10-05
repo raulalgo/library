@@ -1,6 +1,50 @@
 {
  "_about": "Where each spine is in the photos in this folder: corners TL, TR, BR, BL in pixels of the upright full-resolution photo, snapped to the spine's edges; rot turns the straightened crop so the book's head is up (90 = clockwise). Used to cut public/spines/{slug}.jpg.",
  "spines": {
+  "los-medios-de-transporte": {
+   "photo": "../IMG_8574",
+   "q": [
+    [
+     1252,
+     80
+    ],
+    [
+     1798,
+     82
+    ],
+    [
+     1782,
+     3905
+    ],
+    [
+     1128,
+     3910
+    ]
+   ],
+   "rot": 0
+  },
+  "bluey-y-sus-amigos-pequena-biblioteca": {
+   "photo": "../IMG_8577",
+   "q": [
+    [
+     748,
+     346
+    ],
+    [
+     2393,
+     336
+    ],
+    [
+     2250,
+     3355
+    ],
+    [
+     737,
+     3300
+    ]
+   ],
+   "rot": 0
+  },
   "teo-en-la-granja": {
    "photo": "IMG_8544",
    "q": [
