@@ -29,8 +29,8 @@ async function save(path: string, body: Blob | string) {
   if (!res.ok) throw new Error(`could not save ${path}`);
 }
 
-/** Renders the camera's view `margin` times wider and taller around its centre; returns it cropped to what is drawn. */
-async function layer(renderer: THREE.WebGLRenderer, scene: THREE.Scene, cam: THREE.PerspectiveCamera, view: (typeof VIEWS)[number], scale: number, margin: number, file: string): Promise<Placed> {
+/** Renders the camera's view `margin` times wider and taller around its centre, into a 2D canvas. */
+function render(renderer: THREE.WebGLRenderer, scene: THREE.Scene, cam: THREE.PerspectiveCamera, view: { w: number; h: number }, scale: number, margin: number) {
   const W = Math.round(view.w * margin);
   const H = Math.round(view.h * margin);
   renderer.setPixelRatio(scale);
@@ -44,18 +44,29 @@ async function layer(renderer: THREE.WebGLRenderer, scene: THREE.Scene, cam: THR
 
   const src = renderer.domElement;
   const full = Object.assign(document.createElement('canvas'), { width: src.width, height: src.height });
-  const ctx = full.getContext('2d')!;
-  ctx.drawImage(src, 0, 0);
-  const alpha = ctx.getImageData(0, 0, full.width, full.height).data;
-  let [x0, y0, x1, y1] = [full.width, full.height, 0, 0];
-  for (let y = 0; y < full.height; y++)
-    for (let x = 0; x < full.width; x++)
-      if (alpha[(y * full.width + x) * 4 + 3] > 2) {
+  full.getContext('2d')!.drawImage(src, 0, 0);
+  return { full, W, H };
+}
+
+/** The bounds of what is drawn on a canvas, in its px. */
+function drawn(canvas: HTMLCanvasElement) {
+  const alpha = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height).data;
+  let [x0, y0, x1, y1] = [canvas.width, canvas.height, 0, 0];
+  for (let y = 0; y < canvas.height; y++)
+    for (let x = 0; x < canvas.width; x++)
+      if (alpha[(y * canvas.width + x) * 4 + 3] > 2) {
         x0 = Math.min(x0, x);
         x1 = Math.max(x1, x + 1);
         y0 = Math.min(y0, y);
         y1 = Math.max(y1, y + 1);
       }
+  return { x0, y0, x1, y1 };
+}
+
+/** Renders the camera's view `margin` times wider and taller around its centre; returns it cropped to what is drawn. */
+async function layer(renderer: THREE.WebGLRenderer, scene: THREE.Scene, cam: THREE.PerspectiveCamera, view: (typeof VIEWS)[number], scale: number, margin: number, file: string): Promise<Placed> {
+  const { full, W, H } = render(renderer, scene, cam, view, scale, margin);
+  const { x0, y0, x1, y1 } = drawn(full);
   const crop = Object.assign(document.createElement('canvas'), { width: x1 - x0, height: y1 - y0 });
   crop.getContext('2d')!.drawImage(full, -x0, -y0);
   const blob = await new Promise<Blob>((resolve) => crop.toBlob((b) => resolve(b!), 'image/webp', 0.86));
@@ -113,4 +124,39 @@ export async function makePosters(renderer: THREE.WebGLRenderer, scene: THREE.Sc
     ].join('\n'),
   );
   console.log('Posters saved. Reload the page.');
+}
+
+// Dev only: open the site with ?social to render the link preview that chat apps and social sites show
+// (public/poster/social.jpg, see the og:image tags in index.html): the opening view of the island, books,
+// polaroids and floor shadow, centred on the page's light backdrop. Run it again when you run ?poster.
+
+const SOCIAL = { w: 1200, h: 630, pad: 0.07, scale: 2, margin: 2, bg: '#f5f4f0' }; // bg: --bg in style.css, light mode
+
+export async function makeSocial(renderer: THREE.WebGLRenderer, scene: THREE.Scene, rig: Rig, shadow: THREE.Object3D) {
+  const { w, h, pad, scale, margin, bg } = SOCIAL;
+  rig.resize(w, h);
+  rig.progress = 0;
+  rig.update(0);
+
+  // The island alone gives the framing; the shadow is drawn with it but may run past the edges.
+  shadow.visible = false;
+  const bounds = drawn(render(renderer, scene, rig.camera, { w, h }, scale, margin).full);
+  shadow.visible = true;
+  const { full } = render(renderer, scene, rig.camera, { w, h }, scale, margin);
+
+  const out = Object.assign(document.createElement('canvas'), { width: w, height: h });
+  const ctx = out.getContext('2d')!;
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+  const bw = bounds.x1 - bounds.x0;
+  const bh = bounds.y1 - bounds.y0;
+  const k = Math.min((w * (1 - 2 * pad)) / bw, (h * (1 - 2 * pad)) / bh);
+  ctx.imageSmoothingQuality = 'high';
+  ctx.translate(w / 2 - k * (bounds.x0 + bw / 2), h / 2 - k * (bounds.y0 + bh / 2));
+  ctx.scale(k, k);
+  ctx.drawImage(full, 0, 0);
+
+  const blob = await new Promise<Blob>((resolve) => out.toBlob((b) => resolve(b!), 'image/jpeg', 0.9));
+  await save('public/poster/social.jpg', blob);
+  console.log('Social image saved. Reload the page.');
 }
