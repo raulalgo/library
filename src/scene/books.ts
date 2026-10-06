@@ -14,6 +14,7 @@ export type ShelfBook = {
   pull: number;
   turn: number;
   lift: number;
+  lean: number; // radians it leans sideways, top to the right, for the fan (see hint)
   x: number; // where the spread has moved it along the row
   squash: number; // thickness scale from the spread
   held: boolean; // its cover is up in the open view (see bookView.ts), so it is hidden here
@@ -254,6 +255,8 @@ export class Shelf {
   private focusRow: RowName | null = null;
   private focus = 0; // fractional index driving the bulge
   private touch = false;
+  private hintRow: RowName | null = null;
+  private hintF = 0;
   private raycaster = new THREE.Raycaster();
 
   constructor(es: Book[], en: Book[]) {
@@ -294,7 +297,7 @@ export class Shelf {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     this.group.add(mesh);
-    const sb: ShelfBook = { book, mesh, row, index, base, pull: 0, turn: 0, lift: 0, x: base.x, squash: 1, held: false, lid: mesh.getObjectByName('lid') ?? null };
+    const sb: ShelfBook = { book, mesh, row, index, base, pull: 0, turn: 0, lift: 0, lean: 0, x: base.x, squash: 1, held: false, lid: mesh.getObjectByName('lid') ?? null };
     mesh.userData.shelfBook = sb;
     return sb;
   }
@@ -361,6 +364,15 @@ export class Shelf {
     }
     this.selected = next;
     return changed;
+  }
+
+  /**
+   * Before the camera has reached the shelf, the books around the pointer fan out a little: they slide out and lean
+   * away from it, a hint that a click zooms in on them (see Input.frame). `f` is the fractional index under it.
+   */
+  hint(at: { row: RowName; f: number } | null) {
+    this.hintRow = at?.row ?? null;
+    if (at) this.hintF = at.f;
   }
 
   clear() {
@@ -515,7 +527,14 @@ export class Shelf {
         let pull = 0;
         let turn = 0;
         let lift = 0;
-        if (this.focusRow === name && this.selected) {
+        let lean = 0;
+        if (this.hintRow === name && !this.selected && !b.book.flat) {
+          // pulled out most at the pointer, leaning most a hintSigma away on either side
+          const d = (b.index - this.hintF) / config.hintSigma;
+          const g = Math.exp(-(d * d) / 2);
+          pull = g * config.hintPull;
+          lean = d * Math.exp(0.5) * g * THREE.MathUtils.degToRad(config.hintLeanDeg);
+        } else if (this.focusRow === name && this.selected) {
           if (b === this.selected) {
             pull = 1;
             turn = 1;
@@ -528,6 +547,7 @@ export class Shelf {
         b.pull += (pull - b.pull) * k;
         b.turn += (turn - b.turn) * k;
         b.lift += (lift - b.lift) * k;
+        b.lean += (lean - b.lean) * (1 - Math.exp(-dt * 8));
         const lens = spread && b === this.selected ? spread.lens * b.pull : 0;
         const shift = b.book.flat && b === this.selected ? this.onScreen(b, camera) : 0;
         b.x += ((spread?.xs[b.index] ?? b.base.x) + lens + shift - b.x) * k;
@@ -544,9 +564,15 @@ export class Shelf {
           m.rotation.set(turnAmt * THREE.MathUtils.degToRad(config.flatTiltDeg), -turnAmt * (Math.PI / 2), 0);
         } else {
           // a box set already shows its front, so it slides out only far enough to clear the shelf for its lid
-          m.position.set(b.x, b.base.y + b.lift, b.base.z + b.pull * out * (b.lid ? 0.4 : 1));
+          // it leans on its bottom edge, the one on the side it leans to
+          const tip = Math.sign(b.lean) * b.book.t * b.squash / 2;
+          const sin = Math.sin(b.lean), cos = Math.cos(b.lean);
+          const dx = tip - tip * cos + (b.book.h / 2) * sin;
+          const dy = tip * sin - (b.book.h / 2) * (1 - cos);
+          m.position.set(b.x + dx, b.base.y + b.lift + dy, b.base.z + b.pull * out * (b.lid ? 0.4 : 1));
           if (b.lid) b.lid.rotation.x = -turnAmt * THREE.MathUtils.degToRad(config.lidOpenDeg);
           else m.rotation.set(0, -turnAmt * THREE.MathUtils.degToRad(config.coverTurnDeg), 0);
+          m.rotation.z = -b.lean;
           m.scale.x = b.squash;
         }
       }

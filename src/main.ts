@@ -279,6 +279,7 @@ const input = new Input(canvas, rig, shelf, polaroids, {
   dragOpen: (dy) => (openBook ? dragBookView(dy) : dragPolaroids(dy)),
   settleOpen: () => (openBook ? settleBookView() : settlePolaroids()),
   closeOpen: closeDetail,
+  zoomIn: () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }),
 });
 
 // ---------- scroll ----------
@@ -413,6 +414,9 @@ if (new URLSearchParams(location.search).has('tune')) {
     sh.add(config, 'dockMargin', 0, 0.03, 0.001);
     sh.add(config, 'flickVelocity', 0.1, 2, 0.05);
     sh.add(config, 'flickLiftPx', 8, 80, 1);
+    sh.add(config, 'hintPull', 0, 1, 0.01);
+    sh.add(config, 'hintLeanDeg', 0, 20, 0.5);
+    sh.add(config, 'hintSigma', 0.5, 10, 0.1);
     sh.add(config, 'labelTop', 0.05, 0.6, 0.01);
     gui.add({ copy: () => navigator.clipboard.writeText(JSON.stringify(config, null, 2)) }, 'copy').name('Copy values');
     gui.close();

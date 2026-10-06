@@ -41,6 +41,10 @@ export const config = {
   dockMargin: 0.008, // metres of air on each side of the cover
   flickVelocity: 0.6, // px/ms upward that opens the book at the end of a slide (also how fast a swipe down closes an open view)
   flickLiftPx: 24, // or this far up after a slide opens it
+  // Fan (see Shelf.hint): before the camera reaches the shelf, the books around the pointer fan out, a hint to click.
+  hintPull: 0.2, // share of pullOut the book under the pointer slides out
+  hintLeanDeg: 4, // the most a book leans away from the pointer
+  hintSigma: 3, // books from the pointer to the ones leaning most
   labelTop: 1 / 6, // where the selected book's title sits, as a share of screen height from the top (its centre)
 };
 
