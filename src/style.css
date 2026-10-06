@@ -135,8 +135,7 @@ body {
   color: var(--muted);
   letter-spacing: -0.01em;
 }
-
-.lang, .recentre, .footer a {
+.lang, .recentre, .footer a, .credit {
   position: fixed;
   top: max(16px, env(safe-area-inset-top));
   right: 16px;
@@ -496,5 +495,21 @@ body {
   pointer-events: none;
 }
 .footer.on a { opacity: 1; pointer-events: auto; }
+
+/* Who made it, a pill like View all at the bottom right, always shown */
+.credit {
+  top: auto;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 6;
+  margin: 0;
+  cursor: auto;
+}
+.credit a { color: inherit; text-decoration: none; }
+.credit a:hover { text-decoration: underline; }
+/* Where the two pills would meet in the middle, View all goes to the bottom left */
+@media (max-width: 600px) {
+  .footer a { left: max(16px, env(safe-area-inset-left)); transform: none; }
+}
 
 .haptic { position: fixed; left: -100px; top: -100px; opacity: 0; pointer-events: none; }
