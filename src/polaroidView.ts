@@ -70,7 +70,7 @@ function putBack() {
   clearTimeout(landing);
   if (current) current.pile.held = false;
   current = null;
-  hero.classList.remove('names-up', 'names-alone');
+  hero.classList.remove('names-up', 'names-alone', 'gone');
 }
 
 export function openPolaroids(pile: Polaroid, camera: THREE.PerspectiveCamera) {
@@ -100,6 +100,7 @@ export function openPolaroids(pile: Polaroid, camera: THREE.PerspectiveCamera) {
   });
   hero.classList.toggle('names-up', pile.index === NAMED);
   hero.classList.toggle('names-alone', pile.index === NAMED);
+  hero.classList.toggle('gone', pile.index !== NAMED);
   pile.held = true;
   current = { pile, camera, cards };
 }
@@ -127,7 +128,7 @@ export function closePolaroids() {
   view.classList.add('closing');
   view.classList.remove('shown', 'dragging');
   // the rest of the hero comes back as the scrim goes; the names stay over it until the prints have landed
-  hero.classList.remove('names-alone');
+  hero.classList.remove('names-alone', 'gone');
   // the bottom print lands first, the top one last
   cards.forEach((c, i) => {
     c.style.transitionDelay = `${(cards.length - 1 - i) * STAGGER}ms`;
