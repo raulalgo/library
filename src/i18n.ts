@@ -60,6 +60,9 @@ const strings = {
 let current: Lang = detect();
 
 function detect(): Lang {
+  // ?lang=es or ?lang=en, for a link or the demo; not saved
+  const asked = new URLSearchParams(location.search).get('lang');
+  if (asked === 'es' || asked === 'en') return asked;
   try {
     const saved = localStorage.getItem('lang');
     if (saved === 'es' || saved === 'en') return saved;

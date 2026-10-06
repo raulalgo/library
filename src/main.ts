@@ -375,6 +375,15 @@ if (import.meta.env.DEV && new URLSearchParams(location.search).has('social')) {
   Promise.all([island, warm, import('./poster')]).then(([shadow, , { makeSocial }]) => makeSocial(renderer, scene, rig, shadow));
 }
 
+// ---------- demo (?demo, dev only): a scripted walkthrough on the live site, see src/demo/ and demo.html ----------
+
+if (import.meta.env.DEV && new URLSearchParams(location.search).has('demo')) {
+  history.scrollRestoration = 'manual'; // a replay starts where its section does, not where the last one ended
+  Promise.all([warm, import('./demo/player'), import('./demo/script')]).then(([, { play }, { script }]) =>
+    play({ canvas, rig, shelf, polaroids }, script, new URLSearchParams(location.search).get('demo')),
+  );
+}
+
 // ---------- tuning (?tune) ----------
 
 if (new URLSearchParams(location.search).has('tune')) {
