@@ -84,6 +84,8 @@ export function openPolaroids(pile: Polaroid, camera: THREE.PerspectiveCamera) {
   view.classList.remove('closing', 'shown', 'dragging');
   view.style.removeProperty('--drag');
   view.hidden = false;
+  view.classList.toggle('named', pile.index === NAMED);
+  if (pile.index === NAMED) view.style.setProperty('--note-end', `${note.offsetTop + note.offsetHeight}px`);
   row.scrollLeft = 0;
   // Measuring a card gives it a style, so without .still it would transition onto the worktop too.
   row.classList.add('still');

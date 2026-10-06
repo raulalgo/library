@@ -408,10 +408,11 @@ body {
   opacity: 0;
   transition: opacity 0.4s;
 }
-/* Under the Isabel & Linda prints: the cards are centred on the screen, so it starts half a card below the middle. */
+/* Over the Isabel & Linda prints, under the names (.hero .title-names, at the top of the hero). polaroidView.ts
+   measures where it ends into --note-end, and the prints centre in the room below it. */
 .polaroid-note {
   position: absolute;
-  top: calc(50% + var(--print) * 107 / 88 / 2 + 28px);
+  top: calc(clamp(56px, 12vh, 120px) + clamp(44px, 14vw, 64px) * 0.906 + 20px);
   left: 0;
   right: 0;
   max-width: min(480px, 100vw - 32px);
@@ -429,7 +430,9 @@ body {
 .polaroid-heading[hidden], .polaroid-note[hidden] { display: none; }
 .detail.shown :is(.polaroid-heading, .polaroid-note) { opacity: calc(1 - var(--drag, 0)); }
 .detail.dragging :is(.polaroid-heading, .polaroid-note) { transition: none; }
-.polaroids { --print: min(72vw, 320px, (100svh - 120px) * 88 / 107); }
+.polaroids { --print: min(72vw, 320px, (100svh - var(--above, 120px)) * 88 / 107); }
+.polaroids.named { --above: calc(var(--note-end) + 72px); }
+.polaroids.named .polaroid-row { padding-top: calc(var(--note-end) + 24px); }
 .polaroid-row {
   position: relative;
   display: flex;
@@ -448,7 +451,7 @@ body {
 .polaroid-row::-webkit-scrollbar { display: none; }
 /* Wide enough for three side by side: no swiping, which a mouse wheel cannot do. */
 @media (min-width: 760px) {
-  .polaroids { --print: min(320px, (100vw - 112px) / 3, (100svh - 120px) * 88 / 107); }
+  .polaroids { --print: min(320px, (100vw - 112px) / 3, (100svh - var(--above, 120px)) * 88 / 107); }
   .polaroid-row {
     justify-content: center;
     gap: 32px;
