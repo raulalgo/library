@@ -4,7 +4,8 @@ const strings = {
   es: {
     title: 'La biblioteca de Isabel & Linda',
     titleWord: 'Biblioteca',
-    subtitle: 'Linda le ha regalado a su nieta, Isabel, un amor por los libros que hace de la hora de dormir una diversión sin fin',
+    subtitle: 'Linda le ha regalado a su nieta, Isabel, un amor por los libros que hace de la hora de dormir una diversión sin fin.',
+    intro: 'Los libros de las estanterías de Isabel son una mezcla de los que Linda aprendió a querer en sus años de bibliotecaria y de regalos que hemos recibido a lo largo de los años.',
     viewAll: 'Ver todos los libros',
     allBooks: 'Todos los libros',
     close: 'Cerrar',
@@ -30,7 +31,8 @@ const strings = {
   en: {
     title: "Isabel & Linda's Library",
     titleWord: 'Library',
-    subtitle: 'Linda has gifted her granddaughter, Isabel, with a love for books that makes bedtime endless fun',
+    subtitle: 'Linda has gifted her granddaughter, Isabel, with a love for books that makes bedtime endless fun.',
+    intro: 'The books on Isabel’s shelves are a mix of those Linda grew to love in her years as a librarian and gifts we’ve received over the years.',
     viewAll: 'View all books',
     allBooks: 'All the books',
     close: 'Close',

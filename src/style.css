@@ -409,11 +409,29 @@ body {
   opacity: 0;
   transition: opacity 0.4s;
 }
-.polaroid-heading[hidden] { display: none; }
-.detail.shown .polaroid-heading { opacity: calc(1 - var(--drag, 0)); }
-.detail.dragging .polaroid-heading { transition: none; }
+/* Under the Isabel & Linda prints: the cards are centred on the screen, so it starts half a card below the middle. */
+.polaroid-note {
+  position: absolute;
+  top: calc(50% + var(--print) * 107 / 88 / 2 + 28px);
+  left: 0;
+  right: 0;
+  max-width: min(480px, 100vw - 32px);
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: balance;
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.polaroid-heading[hidden], .polaroid-note[hidden] { display: none; }
+.detail.shown :is(.polaroid-heading, .polaroid-note) { opacity: calc(1 - var(--drag, 0)); }
+.detail.dragging :is(.polaroid-heading, .polaroid-note) { transition: none; }
+.polaroids { --print: min(72vw, 320px, (100svh - 120px) * 88 / 107); }
 .polaroid-row {
-  --print: min(72vw, 320px, (100svh - 120px) * 88 / 107);
   position: relative;
   display: flex;
   align-items: center;
@@ -431,8 +449,8 @@ body {
 .polaroid-row::-webkit-scrollbar { display: none; }
 /* Wide enough for three side by side: no swiping, which a mouse wheel cannot do. */
 @media (min-width: 760px) {
+  .polaroids { --print: min(320px, (100vw - 112px) / 3, (100svh - 120px) * 88 / 107); }
   .polaroid-row {
-    --print: min(320px, (100vw - 112px) / 3, (100svh - 120px) * 88 / 107);
     justify-content: center;
     gap: 32px;
     padding-inline: 16px;

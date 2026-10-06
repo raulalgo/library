@@ -16,6 +16,7 @@ const NAMED = 1;
 const view = document.querySelector<HTMLElement>('#polaroid')!;
 const row = view.querySelector<HTMLElement>('.polaroid-row')!;
 const heading = view.querySelector<HTMLElement>('.polaroid-heading')!;
+const note = view.querySelector<HTMLElement>('.polaroid-note')!;
 const hero = document.querySelector<HTMLElement>('#hero')!;
 let current: { pile: Polaroid; camera: THREE.PerspectiveCamera; cards: HTMLElement[] } | null = null;
 let landing = 0;
@@ -79,6 +80,7 @@ export function openPolaroids(pile: Polaroid, camera: THREE.PerspectiveCamera) {
   row.setAttribute('aria-label', t().polaroid[pile.index]);
   heading.textContent = t().polaroid[pile.index];
   heading.hidden = pile.index === NAMED;
+  note.hidden = pile.index !== NAMED;
   view.classList.remove('closing', 'shown', 'dragging');
   view.style.removeProperty('--drag');
   view.hidden = false;
