@@ -1,0 +1,31 @@
+# Served by Hostinger (LiteSpeed/Apache). Copied into dist/ by Vite.
+
+# The folder also sits at raulalgo.es/library/, where the root-absolute asset paths would break.
+# Send any host other than the subdomain there.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^library\.raulalgo\.es$ [NC]
+  RewriteRule ^(.*)$ https://library.raulalgo.es/$1 [R=301,L]
+</IfModule>
+
+AddType model/gltf-binary .glb
+AddType image/vnd.radiance .hdr
+AddType image/webp .webp
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml model/gltf-binary image/vnd.radiance
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Vite fingerprints everything in /assets/, so those never change under the same name.
+  <If "%{REQUEST_URI} =~ m#^/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # Covers, spines, the island model and the poster keep their names between deploys: cache for a day.
+  <ElseIf "%{REQUEST_URI} =~ m#\.(jpg|webp|png|glb|hdr|json)$#">
+    Header set Cache-Control "public, max-age=86400"
+  </ElseIf>
+  <Else>
+    Header set Cache-Control "no-cache"
+  </Else>
+</IfModule>
