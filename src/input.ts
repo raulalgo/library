@@ -14,6 +14,8 @@ type UI = {
   dragOpen: (dy: number) => void;
   settleOpen: () => void;
   closeOpen: () => void;
+  // scroll the page to its end, where the camera is on the shelf and the magnifier works
+  zoomIn: () => void;
 };
 
 type Mode = 'idle' | 'pending' | 'scroll' | 'pan' | 'scrub' | 'orbit';
@@ -29,6 +31,7 @@ type Mode = 'idle' | 'pending' | 'scroll' | 'pan' | 'scrub' | 'orbit';
  * - mouse hover: magnifier, Dock-style (the pointer's place along the row picks the book; see Shelf.pick). On a row
  *   too long for the screen (a narrow window), the pointer works the touch slide's slots instead, and the shelf moves
  *   against it the same way, so every book is in reach without panning (see hover)
+ * - tap or click on the shelves before the camera has reached them: the page scrolls to its end, zooming in on them
  * - arrow keys and the ‹ › buttons: step through the books (main.ts)
  * - Space+drag (mouse) or two-finger drag (touch): free orbit
  */
@@ -49,6 +52,7 @@ export class Input {
   private pointerOver = false;
   private mouseOrbit = false;
   private mouse = { x: 0, y: 0 };
+  private hintAt: { x: number; y: number } | null = null; // the pointer or finger over the scene, for the fan (frame)
   private hoverHeld: { x: number; y: number } | null = null;
   private mouseRow: RowName | null = null; // the row the pointer slides along through the slots, see hover
   private ray = new THREE.Raycaster();
@@ -70,8 +74,9 @@ export class Input {
     canvas.addEventListener('pointerdown', (e) => e.pointerType === 'mouse' && this.mouseDown(e));
     canvas.addEventListener('pointerup', (e) => e.pointerType === 'mouse' && this.mouseUp(e));
     canvas.addEventListener('pointerenter', () => (this.pointerOver = true));
-    canvas.addEventListener('pointerleave', () => {
+    canvas.addEventListener('pointerleave', (e) => {
       this.pointerOver = false;
+      if (e.pointerType === 'mouse') this.hintAt = null;
       if (!this.mouseOrbit) this.hover(null);
     });
     canvas.addEventListener('click', (e) => this.click(e));
@@ -171,6 +176,7 @@ export class Input {
     this.travel = 0;
     this.mode = 'pending';
     this.rig.panVelocity = 0;
+    this.hintAt = { ...this.last };
     this.pressRow = this.rig.inShelf() && !this.rig.orbiting ? (this.shelf.pick(this.rayAt(t.clientX, t.clientY))?.row ?? null) : null;
   }
 
@@ -215,7 +221,10 @@ export class Input {
       else if (sideways && this.rig.inShelf()) {
         this.mode = 'pan';
         this.rig.panHeld = true;
-      } else this.mode = 'scroll';
+      } else {
+        this.mode = 'scroll';
+        this.hintAt = null;
+      }
     }
     if (this.mode === 'pan') {
       e.preventDefault();
@@ -383,7 +392,7 @@ export class Input {
     const ray = this.rayAt(x, y);
     const p = this.polaroids.pick(ray);
     if (p) return this.ui.openPolaroid(p.index);
-    if (!this.rig.inShelf()) return;
+    if (!this.rig.inShelf()) return this.zoomInFrom(ray);
     const hit = this.bookAt(x, y);
     if (!hit) return this.shelf.clear();
     const sb = this.shelf.rows[hit.row].books[hit.index];
@@ -394,8 +403,20 @@ export class Input {
     tick();
   }
 
+  /** Before the camera has reached the shelf, a tap or click on its rows zooms in on it. */
+  private zoomInFrom(ray: THREE.Ray) {
+    if (this.wouldZoomIn(ray)) this.ui.zoomIn();
+  }
+
+  private wouldZoomIn(ray: THREE.Ray) {
+    return !this.rig.inShelf() && !this.rig.orbiting && !!this.shelf.pick(ray);
+  }
+
   /** Called every frame while scrubbing: the shelf moves to keep the picked book under the finger (or pointer). */
   frame(dt: number) {
+    // The fan follows the pointer, and the shelf moving under it as the page scrolls, until the camera is there.
+    const hint = this.hintAt && !this.ui.isOpen() ? this.rayAt(this.hintAt.x, this.hintAt.y) : null;
+    this.shelf.hint(hint && this.wouldZoomIn(hint) ? this.shelf.pick(hint) : null);
     if (this.mouseRow && (this.ui.isOpen() || !this.rig.inShelf() || this.rig.orbiting)) this.endMouseSlide();
     if (this.mode !== 'scrub' && !this.mouseRow) return;
     const { c } = this.slots;
@@ -422,6 +443,7 @@ export class Input {
     }
     if (this.ui.isOpen()) return;
     this.mouse = { x: e.clientX, y: e.clientY };
+    this.hintAt = this.mouse;
     if (this.hoverHeld) {
       if (Math.hypot(e.clientX - this.hoverHeld.x, e.clientY - this.hoverHeld.y) < 6) return;
       this.hoverHeld = null;
@@ -446,8 +468,10 @@ export class Input {
     let polaroid = ray ? this.polaroids.pick(ray) : null;
     this.polaroids.items.forEach((p) => (p.hover = p === polaroid));
     if (polaroid) cursor = 'pointer';
-    if (!this.rig.inShelf() || this.rig.orbiting) this.shelf.clear();
-    else if (ray && !polaroid) {
+    if (!this.rig.inShelf() || this.rig.orbiting) {
+      this.shelf.clear();
+      if (ray && !polaroid && this.wouldZoomIn(ray)) cursor = 'pointer';
+    } else if (ray && !polaroid) {
       // Off the rows (the shelf boards, the sides, the ‹ › buttons) the last book stays out.
       const hit = this.shelf.pick(ray);
       if (hit && this.overflows(hit.row)) {
@@ -488,6 +512,7 @@ export class Input {
     if (this.spaceHeld || (e as PointerEvent).pointerType === 'touch') return;
     const p = this.polaroids.items.find((p) => p.hover);
     if (p) return this.ui.openPolaroid(p.index);
+    this.zoomInFrom(this.rayAt(e.clientX, e.clientY));
     // The book that is out opens, from anywhere on the rows or its cover, but not from the rest of the island.
     if (this.rig.inShelf() && this.shelf.selected && this.shelf.hit(this.rayAt(e.clientX, e.clientY))) this.ui.openBook(this.shelf.selected);
   }

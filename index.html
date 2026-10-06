@@ -23,6 +23,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Tinos is metric-compatible with Times New Roman; it is only downloaded where Times New Roman is not installed. -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ballet:opsz@16..72&family=Tinos:ital@0;1&family=Caveat:wght@500&display=swap" rel="stylesheet" />
+    <!-- Umami visit counter, cookie-free. data-domains keeps the dev server out of the stats; data-exclude-hash stops
+         each opened book (#its-id) from counting as another page view, src/main.ts sends those as events. -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="5df44aa2-202a-4f7e-a973-2d08abbc654b" data-domains="library.raulalgo.es" data-exclude-hash="true"></script>
   </head>
   <body>
     <!-- The opening frame as a still, until the 3D scene is ready (see src/poster.ts and .poster in style.css). -->
@@ -81,7 +84,6 @@
           <p class="detail-about"></p>
           <dl class="detail-facts"></dl>
           <p class="detail-note" data-i18n="placeholderNote"></p>
-          <p class="detail-affiliate" data-i18n="disclosure"></p>
         </div>
       </div>
     </div>
@@ -89,6 +91,7 @@
     <div class="detail polaroids" id="polaroid" hidden>
       <p class="polaroid-heading" aria-hidden="true" hidden></p>
       <div class="polaroid-row" role="dialog" aria-modal="true"></div>
+      <p class="polaroid-note" data-i18n="intro" hidden></p>
     </div>
 
     <main id="story" aria-hidden="true"></main>
@@ -96,6 +99,8 @@
     <footer class="footer" id="footer">
       <a href="#" data-view-all data-i18n="viewAll"></a>
     </footer>
+
+    <p class="credit"><a href="http://raulalgo.es" target="_blank" rel="noopener">raulalgo.es</a> — <a href="https://x.com/raulalgo" target="_blank" rel="noopener">@raulalgo</a></p>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

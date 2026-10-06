@@ -3,3 +3,6 @@ dist
 .DS_Store
 blender/bake
 *.blend1
+
+# ftp deploy credentials
+.env.deploy

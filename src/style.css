@@ -125,8 +125,10 @@ body {
 /* The Isabel & Linda pile open (polaroidView.ts): the names stay sharp over the scrim as the prints' caption, and
    the rest of the hero fades out while the scrim is up. */
 .hero.names-up { z-index: 21; }
-.hero > :not(.title), .title-word { transition: opacity 0.4s; }
+.hero > *, .title-word { transition: opacity 0.4s; }
 .hero.names-alone > :not(.title), .hero.names-alone .title-word { opacity: 0; }
+/* Any other pile open: the whole hero goes, so the pile's heading reads alone over the scrim. */
+.hero.gone > * { opacity: 0; }
 .hero .subtitle {
   margin: 40px auto 0;
   max-width: 29.3em;
@@ -135,8 +137,7 @@ body {
   color: var(--muted);
   letter-spacing: -0.01em;
 }
-
-.lang, .recentre, .footer a {
+.lang, .recentre, .footer a, .credit {
   position: fixed;
   top: max(16px, env(safe-area-inset-top));
   right: 16px;
@@ -282,8 +283,6 @@ body {
 .detail-facts dd { margin: 0; }
 .detail-meta [hidden] { display: none; }
 .detail-note { margin: 20px 0 0; font-size: 14px; color: var(--muted); }
-/* The affiliate note goes with the book, where the shop links will be. */
-.detail-affiliate { margin: 20px 0 0; font-size: 12px; color: var(--muted); }
 /* The details come in once the cover is on its way, and go before it lands. */
 .detail-meta { opacity: 0; transition: opacity 0.2s; }
 .detail.shown .detail-meta { opacity: 1; transition: opacity 0.4s 0.15s; }
@@ -409,11 +408,32 @@ body {
   opacity: 0;
   transition: opacity 0.4s;
 }
-.polaroid-heading[hidden] { display: none; }
-.detail.shown .polaroid-heading { opacity: calc(1 - var(--drag, 0)); }
-.detail.dragging .polaroid-heading { transition: none; }
+/* Over the Isabel & Linda prints, under the names (.hero .title-names, at the top of the hero). polaroidView.ts
+   measures where it ends into --note-end, and the prints centre in the room below it. */
+.polaroid-note {
+  position: absolute;
+  top: calc(clamp(56px, 12vh, 120px) + clamp(44px, 14vw, 64px) * 0.906 + 20px);
+  left: 0;
+  right: 0;
+  max-width: min(480px, 100vw - 32px);
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: balance;
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.polaroid-heading[hidden], .polaroid-note[hidden] { display: none; }
+.detail.shown :is(.polaroid-heading, .polaroid-note) { opacity: calc(1 - var(--drag, 0)); }
+.detail.dragging :is(.polaroid-heading, .polaroid-note) { transition: none; }
+.polaroids { --print: min(72vw, 320px, (100svh - var(--above, 120px)) * 88 / 107); }
+.polaroids.named { --above: calc(var(--note-end) + 72px); }
+.polaroids.named .polaroid-row { padding-top: calc(var(--note-end) + 24px); }
 .polaroid-row {
-  --print: min(72vw, 320px, (100svh - 120px) * 88 / 107);
   position: relative;
   display: flex;
   align-items: center;
@@ -431,8 +451,8 @@ body {
 .polaroid-row::-webkit-scrollbar { display: none; }
 /* Wide enough for three side by side: no swiping, which a mouse wheel cannot do. */
 @media (min-width: 760px) {
+  .polaroids { --print: min(320px, (100vw - 112px) / 3, (100svh - var(--above, 120px)) * 88 / 107); }
   .polaroid-row {
-    --print: min(320px, (100vw - 112px) / 3, (100svh - 120px) * 88 / 107);
     justify-content: center;
     gap: 32px;
     padding-inline: 16px;
@@ -478,5 +498,21 @@ body {
   pointer-events: none;
 }
 .footer.on a { opacity: 1; pointer-events: auto; }
+
+/* Who made it, a pill like View all at the bottom right, always shown */
+.credit {
+  top: auto;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 6;
+  margin: 0;
+  cursor: auto;
+}
+.credit a { color: inherit; text-decoration: none; }
+.credit a:hover { text-decoration: underline; }
+/* Where the two pills would meet in the middle, View all goes to the bottom left */
+@media (max-width: 600px) {
+  .footer a { left: max(16px, env(safe-area-inset-left)); transform: none; }
+}
 
 .haptic { position: fixed; left: -100px; top: -100px; opacity: 0; pointer-events: none; }

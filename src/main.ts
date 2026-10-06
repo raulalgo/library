@@ -138,8 +138,16 @@ function fillDetail(sb: ShelfBook) {
 // it any other way (the scrim, a swipe down, Esc) goes back past that entry too, and popstate does the closing.
 let leaving = 0; // a history.back() on its way, see closeDetail
 
+// Umami, loaded in index.html, counts the books opened. It is missing when a blocker stops the script.
+declare global {
+  interface Window {
+    umami?: { track(event: string, data?: Record<string, string>): void };
+  }
+}
+
 function showBook(sb: ShelfBook, fly = true) {
   fillDetail(sb);
+  window.umami?.track('Open book', { book: sb.book.title });
   // Over the View all wall, the cover flies off the wall and back onto it.
   const home = isAllOpen() ? onWall(sb) : onShelf(sb, rig.camera);
   if (openBook) swapBookView(home);
@@ -271,6 +279,7 @@ const input = new Input(canvas, rig, shelf, polaroids, {
   dragOpen: (dy) => (openBook ? dragBookView(dy) : dragPolaroids(dy)),
   settleOpen: () => (openBook ? settleBookView() : settlePolaroids()),
   closeOpen: closeDetail,
+  zoomIn: () => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }),
 });
 
 // ---------- scroll ----------
@@ -366,6 +375,15 @@ if (import.meta.env.DEV && new URLSearchParams(location.search).has('social')) {
   Promise.all([island, warm, import('./poster')]).then(([shadow, , { makeSocial }]) => makeSocial(renderer, scene, rig, shadow));
 }
 
+// ---------- demo (?demo, dev only): a scripted walkthrough on the live site, see src/demo/ and demo.html ----------
+
+if (import.meta.env.DEV && new URLSearchParams(location.search).has('demo')) {
+  history.scrollRestoration = 'manual'; // a replay starts where its section does, not where the last one ended
+  Promise.all([warm, import('./demo/player'), import('./demo/script')]).then(([, { play }, { script }]) =>
+    play({ canvas, rig, shelf, polaroids }, script, new URLSearchParams(location.search).get('demo')),
+  );
+}
+
 // ---------- tuning (?tune) ----------
 
 if (new URLSearchParams(location.search).has('tune')) {
@@ -405,6 +423,9 @@ if (new URLSearchParams(location.search).has('tune')) {
     sh.add(config, 'dockMargin', 0, 0.03, 0.001);
     sh.add(config, 'flickVelocity', 0.1, 2, 0.05);
     sh.add(config, 'flickLiftPx', 8, 80, 1);
+    sh.add(config, 'hintPull', 0, 1, 0.01);
+    sh.add(config, 'hintLeanDeg', 0, 20, 0.5);
+    sh.add(config, 'hintSigma', 0.5, 10, 0.1);
     sh.add(config, 'labelTop', 0.05, 0.6, 0.01);
     gui.add({ copy: () => navigator.clipboard.writeText(JSON.stringify(config, null, 2)) }, 'copy').name('Copy values');
     gui.close();
